@@ -27,7 +27,7 @@ Objectif : t’entraîner à planifier, implémenter et gérer des déploiements
 - `07-logging-loki-vector/` : stack de logs centralisée.
 - `08-exam-scenarios/` : scénarios EX380-like, chronométrés.
 - `diagrams/` : descriptions d’architecture (à transformer en PNG/Draw.io).
-- `manus/` : prompts pour agents (Manus, autres IA) afin de générer les diagrammes et enrichir les labs.
+- `zidan/` : prompts pour agents (Zidan, autres IA) afin de générer les diagrammes et enrichir les labs.
 
 ## Mode d’emploi conseillé
 

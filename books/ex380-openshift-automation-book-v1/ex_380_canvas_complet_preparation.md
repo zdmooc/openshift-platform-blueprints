@@ -39,7 +39,7 @@ ex380-openshift-automation/
 ├── 07-logging-loki-vector/
 ├── 08-exam-scenarios/
 ├── diagrams/
-└── manus/
+└── zidan/
 ```
 
 ### 2.1. Fichiers racine
@@ -63,7 +63,7 @@ ex380-openshift-automation/
 - **`07-logging-loki-vector/`** : stack logging Vector + Loki, Event Router, rétention.
 - **`08-exam-scenarios/`** : scénarios complets EX380-like.
 - **`diagrams/`** : descriptions des schémas d’architecture.
-- **`manus/`** : prompt pour agents Manus / IA afin de compléter/enrichir les labs.
+- **`zidan/`** : prompt pour agents Zidan / IA afin de compléter/enrichir les labs.
 
 ---
 
@@ -319,12 +319,12 @@ Descriptions de base (à transformer en vrais diagrammes) :
 
 ---
 
-## 5. Intégration Manus / agents IA (dossier `manus/`)
+## 5. Intégration Zidan / agents IA (dossier `zidan/`)
 
-Dossier : `manus/`
+Dossier : `zidan/`
 
 - `prompt-ex380-depot.md` :
-  - Prompt dédié pour déléguer à un agent (Manus ou autre IA) :
+  - Prompt dédié pour déléguer à un agent (Zidan ou autre IA) :
     - complétion de tous les labs skeleton,
     - enrichissement des scénarios,
     - génération de descriptions de diagrammes encore plus détaillées.
@@ -332,7 +332,7 @@ Dossier : `manus/`
 Usage typique :
 
 1. Ouvrir le fichier `prompt-ex380-depot.md`.
-2. Le coller dans Manus (ou un autre orchestrateur d’agents IA).
+2. Le coller dans Zidan (ou un autre orchestrateur d’agents IA).
 3. Récupérer en sortie des blocs `=== FILE: chemin/...` avec du markdown.
 4. Coller ces blocs directement dans le dépôt.
 

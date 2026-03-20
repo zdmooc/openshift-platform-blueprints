@@ -31,7 +31,7 @@ Reprendre la pratique **EX280** sur **CRC (OpenShift Local 4.19.3)** avec un seu
 
 - Dossier : `books/ex280-book-v1/`
 - Sous-dossiers :
-  - `manuscript/` : Semaine 1 → 8, chapitres f0 → f6.
+  - `zidancript/` : Semaine 1 → 8, chapitres f0 → f6.
   - `sources/` : notes détaillées (dont `ex_280_semaine_3_rollout_image_streams.md`).
 - Rôle : explications, schémas, cours, **pas de labs exam**.
 

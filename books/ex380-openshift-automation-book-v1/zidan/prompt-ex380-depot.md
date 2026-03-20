@@ -1,5 +1,5 @@
 
-# Prompt Manus – Génération dépôt complet EX380
+# Prompt Zidan – Génération dépôt complet EX380
 
 Rôle : assistant technique senior spécialisé OpenShift 4.14 et Red Hat EX380.
 

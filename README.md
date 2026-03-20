@@ -48,7 +48,7 @@ Ce dépôt contient aussi des “books” complets de préparation aux exams :
 - `books/ex370-odf-book-v1/` : livre + labs pour **EX370 – OpenShift Data Foundation (ODF)**.
 
 Chaque book contient :
-- un dossier `book/` ou `manuscript/` avec les chapitres,
+- un dossier `book/` ou `zidancript/` avec les chapitres,
 - un dossier `labs/` avec les exercices pratiques,
 - éventuellement des scripts (`scripts/`) et des schémas (`images/`).
 e dépôt contient aussi des “books” complets de préparation aux exams :
