@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: broken-task
+spec:
+  params:
+    - name: message
+      type: string
+  steps:
+    - name: fail
+      image: registry.access.redhat.com/ubi9/ubi-minimal
+      script: |
+        #!/usr/bin/env sh
+        ech "$(params.message)"

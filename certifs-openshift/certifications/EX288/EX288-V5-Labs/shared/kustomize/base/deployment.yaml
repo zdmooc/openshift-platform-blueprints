@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-node-k
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basic-node-k
+  template:
+    metadata:
+      labels:
+        app: basic-node-k
+    spec:
+      containers:
+        - name: app
+          image: image-registry.openshift-image-registry.svc:5000/ex288-k/basic-node:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_MESSAGE
+              value: "hello from kustomize base"

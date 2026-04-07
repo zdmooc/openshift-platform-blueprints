@@ -1,0 +1,7 @@
+- [ ] Build S2I réussi
+- [ ] Trigger ImageChange validé
+- [ ] Chart Helm déployé
+- [ ] Overlay Kustomize appliqué
+- [ ] Service / Route corrigé
+- [ ] InitContainer fonctionnel
+- [ ] Push registry interne OK

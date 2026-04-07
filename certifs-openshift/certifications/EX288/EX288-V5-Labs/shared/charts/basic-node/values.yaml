@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: image-registry.openshift-image-registry.svc:5000/ex288-helm/basic-node
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+route:
+  enabled: true
+
+env:
+  APP_MESSAGE: "hello from helm"
+
+probes:
+  pathLiveness: /healthz
+  pathReadiness: /readyz

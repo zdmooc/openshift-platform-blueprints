@@ -1,0 +1,54 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: basic-node-template
+parameters:
+  - name: APP_NAME
+    value: basic-node-tpl
+  - name: IMAGE
+    value: image-registry.openshift-image-registry.svc:5000/ex288-template/basic-node:latest
+  - name: MESSAGE
+    value: hello from template
+objects:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: ${APP_NAME}
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: ${APP_NAME}
+      template:
+        metadata:
+          labels:
+            app: ${APP_NAME}
+        spec:
+          containers:
+            - name: app
+              image: ${IMAGE}
+              env:
+                - name: APP_MESSAGE
+                  value: ${MESSAGE}
+              ports:
+                - containerPort: 8080
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: ${APP_NAME}
+    spec:
+      selector:
+        app: ${APP_NAME}
+      ports:
+        - port: 8080
+          targetPort: 8080
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      name: ${APP_NAME}
+    spec:
+      to:
+        kind: Service
+        name: ${APP_NAME}
+      port:
+        targetPort: 8080

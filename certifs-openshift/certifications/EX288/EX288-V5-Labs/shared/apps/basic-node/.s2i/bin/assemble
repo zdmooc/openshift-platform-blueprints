@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo "[assemble] copie des sources"
+cp -rv /tmp/src/. /opt/app-root/src/
+cd /opt/app-root/src
+npm install --omit=dev
+echo "[assemble] fin"

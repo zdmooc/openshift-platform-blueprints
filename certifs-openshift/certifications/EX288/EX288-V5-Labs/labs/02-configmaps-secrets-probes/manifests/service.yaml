@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: basic-node
+spec:
+  selector:
+    app: basic-node
+  ports:
+    - port: 8080
+      targetPort: 8080

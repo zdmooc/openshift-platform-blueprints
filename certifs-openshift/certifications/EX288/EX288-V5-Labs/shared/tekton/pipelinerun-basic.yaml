@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: basic-pipeline-run
+spec:
+  pipelineRef:
+    name: basic-pipeline
+  params:
+    - name: message
+      value: "hello from tekton"

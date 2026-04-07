@@ -1,0 +1,10 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: basic-node-k
+spec:
+  to:
+    kind: Service
+    name: basic-node-k
+  port:
+    targetPort: 8080

@@ -1,0 +1,17 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: basic-node-s2i
+spec:
+  source:
+    type: Binary
+    binary: {}
+  strategy:
+    sourceStrategy:
+      from:
+        kind: DockerImage
+        name: registry.access.redhat.com/ubi9/nodejs-20:latest
+  output:
+    to:
+      kind: ImageStreamTag
+      name: basic-node-s2i:latest
