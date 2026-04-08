@@ -1,79 +1,257 @@
-# RH OpenShift Architect Lab
+# OpenShift Platform Blueprints
 
-Dépôt de travail pour préparer une trajectoire **Red Hat Certified OpenShift Architect** sur 18–24 mois.
+Dépôt principal de démonstration technique centré sur **Red Hat OpenShift**, l’ingénierie de plateforme et les pratiques **cloud-native** associées.
 
-Il est organisé par certification et par type de contenus :
-- `00-roadmap/` : feuille de route globale, planning, stratégie.
-- `common/` : socle commun (cluster de lab, GitOps, conventions).
-- `ex280-admin/` : préparation EX280 (OpenShift Administrator).
-- `ex288-appdev/` : préparation EX288 (OpenShift Application Developer).
-- `ex380-automation-integration/` : préparation EX380 (Automation & Integration).
-- `ex370-odf/` : préparation EX370 (OpenShift Data Foundation).
-- `ex480-multicluster/` : préparation EX480 (MultiCluster Management).
-- `ex482-kafka/` : préparation EX482 (Event‑Driven Development with Kafka).
+Ce dépôt a une double vocation :
 
-> Principe : chaque dossier contient un `README.md` + des labs pratiques
-> que tu peux exécuter sur ton propre cluster (CRC, OKD, OpenShift managé, etc.).
+- servir de **portfolio technique** orienté OpenShift ;
+- structurer un ensemble de ressources réutilisables autour des **certifications**, des **blueprints de plateforme**, des **use cases** et des **livrables d’architecture**.
 
-## Pré‑requis conseillés
+---
 
-- Confort avec Linux (ligne de commande, SSH, sudo).
-- Notions Kubernetes (pods, services, deployments, configmaps, secrets).
-- Un cluster de lab (single‑node ou petit cluster) :
-  - CodeReady Containers / Local OpenShift,
-  - ou OKD / Kind + OpenShift GitOps (pour simuler),
-  - ou un cluster managé (ROSA, ARO, OCP managé).
+## Objectif
 
-## Usage conseillé
+Ce dépôt n’est pas un simple espace de notes.
 
-1. Lire `00-roadmap/roadmap-24m.md` pour la trajectoire globale.
-2. Monter ton cluster de lab avec `common/cluster-lab-setup.md`.
-3. Travailler les labs dans l’ordre :
-   - `ex280-admin/` → socle admin,
-   - `ex288-appdev/` → vision développeur,
-   - `ex380-automation-integration/` → CI/CD & GitOps,
-   - `ex370-odf/` → stockage et data,
-   - `ex480-multicluster/` → multi‑cluster,
-   - `ex482-kafka/` → event‑driven & Kafka.
-4. Utiliser les checklists pour t’auto‑évaluer avant chaque examen.
+Il est conçu pour montrer un niveau de travail cohérent autour de :
 
-Ce dépôt est un squelette structuré : libre à toi de l’enrichir,
-d’ajouter tes propres scripts et de l’adapter à ton contexte de mission.
+- l’administration et l’exploitation d’environnements OpenShift ;
+- le déploiement d’applications cloud-native ;
+- les pratiques GitOps, CI/CD et automatisation ;
+- la sécurité, la gouvernance et l’observabilité ;
+- la structuration de cas d’usage concrets sur OpenShift ;
+- un positionnement **Architecte / Expert OpenShift**.
 
-## Books et supports d’exam
+---
 
-Ce dépôt contient aussi des “books” complets de préparation aux exams :
+## Positionnement
 
-- `books/ex280-book-v1/` : livre + labs pour **EX280 – OpenShift Administrator**.
-- `books/ex370-odf-book-v1/` : livre + labs pour **EX370 – OpenShift Data Foundation (ODF)**.
+Ce dépôt vise à démontrer une capacité à travailler sur les axes suivants :
 
-Chaque book contient :
-- un dossier `book/` ou `zidancript/` avec les chapitres,
-- un dossier `labs/` avec les exercices pratiques,
-- éventuellement des scripts (`scripts/`) et des schémas (`images/`).
-e dépôt contient aussi des “books” complets de préparation aux exams :
+- **OpenShift Administration**
+- **OpenShift Application Development**
+- **GitOps / Argo CD / CI-CD**
+- **Platform Engineering**
+- **SRE / Observabilité**
+- **Sécurité / Gouvernance / Réseau**
+- **Cas d’usage métier sur OpenShift**
 
-- `books/ex280-book-v1/` : livre + labs pour **EX280 – OpenShift Administrator**.
-- `books/ex370-odf-book-v1/` : livre + labs pour **EX370 – OpenShift Data Foundation (ODF)**.
-- `books/ex380-openshift-automation-book-v1/` : labs structurés pour **EX380 – OpenShift Automation and Integration** (auth, backup/restore, partitionnement de cluster, GitOps, observabilité).
+Il sert à la fois de :
 
-- `books/ex280-book-v1/` : EX280 – OpenShift Administrator.
-- `books/ex288-appdev-book-v1/` : EX288 – OpenShift Application Developer (apps, labs, manifests, QCM, mermaid, scripts).
-- `books/ex370-odf-book-v1/` : EX370 – OpenShift Data Foundation.
-- `books/ex380-openshift-automation-book-v1/` : EX380 – Automation & Integration.
+- support de progression ;
+- base de capitalisation ;
+- vitrine technique ;
+- socle de démonstration en contexte CV / mission / entretien.
 
-## Volet Architecte OpenShift (plateforme)
+---
 
-En plus des modules orientés certifications (ex280, ex288, ex370, ex380, ex480, ex482),
-ce dépôt contient un volet plateforme pour le travail d'architecture OpenShift :
+## Structure du dépôt
 
-- docs/ARCHITECTURE.md : vue globale de la plateforme
-- docs/multi-cluster.md : scénarios multi-cluster et ACM
-- docs/gitops-platform.md : stratégie GitOps de la plateforme
-- docs/observability-sre.md : observabilité et pratiques SRE
-- docs/security-architecture.md : modèle de sécurité
-- docs/portfolio-architect.md : synthèse exploitable dans le CV
-- platform/gitops/ : manifests GitOps (Applications Argo CD, cluster-config)
-- platform/observability/ : exemples de ServiceMonitor, dashboards
-- platform/security/ : exemples de namespaces, RBAC, NetworkPolicy
+```text
+.
+├── certifications/
+├── platform/
+├── use-cases/
+├── common/
+└── portfolio/
+```
 
+Chaque répertoire a un rôle précis.
+
+---
+
+## 1. Certifications
+
+Le dossier `certifications/` regroupe les parcours de certification OpenShift cœur et les supports associés.
+
+Noyau actuel :
+
+- `certifications/ex280/` — **OpenShift Administration**
+- `certifications/ex288/` — **OpenShift Application Development**
+- `certifications/ex370/` — **OpenShift Data Foundation**
+- `certifications/ex380/` — **Automation / Integration / Operations**
+- `certifications/ex480/` — **Multi-cluster / Governance**
+- `certifications/ex482/` — **Event-driven / Kafka**
+
+Selon la certification, on peut y trouver :
+
+- un `README.md` de cadrage ;
+- un `book-v1/` pour le support long ;
+- un `track/` pratique ;
+- des fichiers de préparation (`PREPARATION.md`) ;
+- des notes (`NOTES.md`) ;
+- des checklists (`CHECKLIST.md`) ;
+- des archives ou versions historiques.
+
+### Finalité de ce dossier
+
+Le but n’est pas uniquement la révision d’examen.
+
+Ce dossier sert aussi à :
+
+- structurer un parcours de montée en compétence ;
+- transformer les révisions en actifs réutilisables ;
+- relier les certifications aux problématiques réelles de plateforme ;
+- montrer une progression crédible vers un profil OpenShift confirmé.
+
+---
+
+## 2. Platform
+
+Le dossier `platform/` porte les **blueprints de plateforme réutilisables**.
+
+On y place les composants structurants d’une plateforme OpenShift moderne, par exemple :
+
+- GitOps ;
+- Argo CD ;
+- CI/CD ;
+- sécurité ;
+- réseau ;
+- observabilité ;
+- bootstrap d’environnement ;
+- standards de structuration ;
+- patterns d’industrialisation.
+
+### Finalité de ce dossier
+
+Le rôle de `platform/` est de fournir des éléments :
+
+- réutilisables ;
+- structurés ;
+- orientés exploitation réelle ;
+- compatibles avec une logique d’architecture et de delivery.
+
+En d’autres termes, `platform/` contient le **socle technique réemployable**.
+
+---
+
+## 3. Use Cases
+
+Le dossier `use-cases/` relie les blueprints à des scénarios concrets.
+
+Exemples de use cases visés :
+
+- **IBM ODM on OpenShift**
+- **Keycloak / SSO / OIDC**
+- **Kafka / architectures event-driven**
+- **SRE / observabilité / runbooks**
+- **OpenShift sur Azure**
+- **déploiements applicatifs industrialisés**
+
+### Finalité de ce dossier
+
+Chaque use case a vocation à documenter :
+
+- le contexte ;
+- l’objectif ;
+- l’architecture cible ;
+- les composants mobilisés ;
+- les contraintes ;
+- les conventions de déploiement ;
+- les points de vigilance ;
+- les liens vers les blueprints de `platform/`.
+
+Le but est de faire le pont entre **architecture**, **plateforme** et **mise en œuvre**.
+
+---
+
+## 4. Common
+
+Le dossier `common/` regroupe les éléments partagés entre plusieurs certifications, plusieurs use cases ou plusieurs blueprints.
+
+On peut y trouver par exemple :
+
+- des scripts ;
+- des templates ;
+- des manifests partagés ;
+- des applications de référence ;
+- des conventions ;
+- des ressources communes.
+
+### Finalité de ce dossier
+
+Éviter la duplication et centraliser les éléments transverses utiles à plusieurs parties du dépôt.
+
+---
+
+## 5. Portfolio
+
+Le dossier `portfolio/` est destiné aux éléments de démonstration orientés :
+
+- architecture ;
+- cadrage ;
+- synthèse ;
+- preuve de travail ;
+- valorisation CV / mission / entretien.
+
+On peut y placer :
+
+- des livrables techniques ;
+- des DAT ou dossiers de cadrage ;
+- des synthèses ;
+- des notes de positionnement ;
+- des éléments de storytelling technique ;
+- des démonstrateurs de posture architecte.
+
+### Finalité de ce dossier
+
+Montrer non seulement la capacité à produire du contenu technique, mais aussi à le **structurer**, le **présenter** et le **valoriser**.
+
+---
+
+## Principes d’organisation
+
+Ce dépôt suit quelques principes simples :
+
+### 1. Lisibilité
+Chaque dossier doit avoir un rôle clair.
+
+### 2. Réutilisabilité
+Les contenus doivent pouvoir être repris dans un autre contexte : lab, mission, support de préparation, démonstration.
+
+### 3. Séparation des préoccupations
+- `certifications/` pour les parcours certifiants ;
+- `platform/` pour les blueprints techniques ;
+- `use-cases/` pour les scénarios concrets ;
+- `common/` pour le partagé ;
+- `portfolio/` pour la démonstration globale.
+
+### 4. Progression
+Le dépôt doit pouvoir accompagner une montée en compétence du niveau administration / développement vers un niveau plateforme / architecture.
+
+### 5. Cohérence portfolio
+Le dépôt doit rester lisible pour un recruteur, un client ou un pair technique qui le découvre sans contexte préalable.
+
+---
+
+## Navigation conseillée
+
+Ordre de lecture recommandé :
+
+1. commencer par `certifications/` ;
+2. poursuivre avec `platform/` ;
+3. explorer ensuite `use-cases/` ;
+4. utiliser `common/` comme socle partagé ;
+5. terminer par `portfolio/` pour la vue globale et démonstrative.
+
+---
+
+## Public visé
+
+Ce dépôt peut intéresser :
+
+- les ingénieurs OpenShift ;
+- les consultants plateforme ;
+- les architectes cloud / DevOps ;
+- les profils SRE / GitOps / sécurité ;
+- les personnes préparant des certifications OpenShift ;
+- les recruteurs ou clients souhaitant évaluer un niveau de structuration technique.
+
+---
+
+## Auteur
+
+**Zidane Djamal**  
+Architecte Cloud & DevOps | Expert OpenShift & Kubernetes
+
+Ce dépôt rassemble des ressources orientées terrain, architecture et industrialisation, construites pour servir à la fois de support de progression et de portfolio technique.
