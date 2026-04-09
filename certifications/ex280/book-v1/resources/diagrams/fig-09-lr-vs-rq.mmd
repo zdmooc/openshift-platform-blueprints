@@ -1,7 +1,0 @@
-﻿flowchart LR
-  Dev["Developer creates Pod"] --> LR["LimitRange applies defaults (if requests/limits missing)"]
-  Dev --> RQ["ResourceQuota check (budget hard limits)"]
-  LR --> Admit{Admit?}
-  RQ --> Admit
-  Admit -- Yes --> Pod["Pod accepted"]
-  Admit -- No --> Rej["Rejected: quota exceeded"]
