@@ -1,25 +1,32 @@
-# Lab 13 — Jobs & CronJobs: one-shot tasks, scheduling, secrets, history, troubleshooting
+# Lab16 — Jobs & CronJobs
 
+## Objectif
 
-## Objectifs EX280 couverts
-- Déployer des jobs (one-time tasks)
-- Configurer des cron jobs Kubernetes
-- Utiliser des secrets dans un job
+Pratiquer :
 
-## Prérequis
+- Job one-shot ;
+- CronJob périodique ;
+- secret consommé par un Job ;
+- ServiceAccount dédiée.
+
+## Pré-requis
+
 ```bash
-export LAB=13
+export LAB=16
 export NS=ex280-lab${LAB}-zidane
-oc new-project "$NS"
+oc get project "$NS" || oc new-project "$NS"
+oc project "$NS"
 ```
 
 ## Tâches
-### 1) Secret consommé par un Job
+
+### 1) Secret et ServiceAccount
 ```bash
 oc create secret generic job-secret --from-literal=TARGET_URL=https://example.org
+oc create serviceaccount batch-sa
 ```
 
-Créer un Job qui lit le secret et exécute une commande :
+### 2) Job
 ```bash
 cat <<'YAML' | oc apply -f -
 apiVersion: batch/v1
@@ -29,6 +36,7 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: batch-sa
       restartPolicy: Never
       containers:
       - name: fetch
@@ -45,16 +53,12 @@ spec:
               name: job-secret
               key: TARGET_URL
 YAML
-```
 
-Suivre l’exécution :
-```bash
 oc get job fetch-once -w
 oc logs -l job-name=fetch-once
-oc describe job fetch-once | sed -n '1,220p'
 ```
 
-### 2) CronJob: toutes les minutes (puis suspend)
+### 3) CronJob
 ```bash
 cat <<'YAML' | oc apply -f -
 apiVersion: batch/v1
@@ -69,6 +73,7 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: batch-sa
           restartPolicy: Never
           containers:
           - name: hello
@@ -79,34 +84,21 @@ spec:
                 date
                 echo "cron hello"
 YAML
-```
 
-Vérifier création de jobs :
-```bash
 oc get cronjob hello-cron -o wide
-oc get jobs --watch
 ```
 
-Suspendre :
+### 4) Suspendre
 ```bash
 oc patch cronjob hello-cron -p '{"spec":{"suspend":true}}'
-oc get cronjob hello-cron -o jsonpath='{.spec.suspend}{"
-"}'
-```
-
-### 3) Troubleshooting Job/CronJob
-- Voir les events :
-```bash
-oc get events --sort-by=.metadata.creationTimestamp | tail -n 30
-```
-- Identifier les pods d’un job :
-```bash
-oc get pods -l job-name=fetch-once
+oc get cronjob hello-cron -o jsonpath='{.spec.suspend}{"\n"}'
 ```
 
 ## Vérifications
-- Job `fetch-once` termine `Complete`.
-- CronJob crée des Jobs, puis s’arrête après `suspend: true`.
+
+- Job `Complete`
+- CronJob présent
+- `suspend: true` après patch
 
 ## Nettoyage
 ```bash
