@@ -1,257 +1,271 @@
 # OpenShift Platform Blueprints
 
-Dépôt principal de démonstration technique centré sur **Red Hat OpenShift**, l’ingénierie de plateforme et les pratiques **cloud-native** associées.
+Dépôt principal de démonstration technique consacré à **Red Hat OpenShift**, au **platform engineering**, au **GitOps**, à la **sécurité**, à l’**observabilité** et à la **structuration de cas d’usage cloud-native**.
 
-Ce dépôt a une double vocation :
+Ce dépôt a une double finalité :
 
 - servir de **portfolio technique** orienté OpenShift ;
-- structurer un ensemble de ressources réutilisables autour des **certifications**, des **blueprints de plateforme**, des **use cases** et des **livrables d’architecture**.
+- capitaliser des **blueprints**, des **documents d’architecture**, des **supports de préparation**, des **labs** et des **cas concrets** réutilisables en contexte mission, entretien ou montée en compétence.
 
 ---
 
-## Objectif
+## Objectif du dépôt
 
-Ce dépôt n’est pas un simple espace de notes.
+`openshift-platform-blueprints` n’est pas un simple dépôt de notes.
 
-Il est conçu pour montrer un niveau de travail cohérent autour de :
+Il est conçu pour démontrer une capacité réelle à :
 
-- l’administration et l’exploitation d’environnements OpenShift ;
-- le déploiement d’applications cloud-native ;
-- les pratiques GitOps, CI/CD et automatisation ;
-- la sécurité, la gouvernance et l’observabilité ;
-- la structuration de cas d’usage concrets sur OpenShift ;
-- un positionnement **Architecte / Expert OpenShift**.
+- structurer une plateforme OpenShift lisible et industrialisable ;
+- documenter une architecture de manière exploitable ;
+- relier théorie, certification, exploitation et design de plateforme ;
+- produire des actifs techniques réutilisables pour du **lab**, du **portfolio** ou de la **préparation mission** ;
+- évoluer d’une logique de pratique individuelle vers une posture **Architecte / Expert OpenShift**.
 
 ---
 
-## Positionnement
+## Ce que le dépôt cherche à démontrer
 
-Ce dépôt vise à démontrer une capacité à travailler sur les axes suivants :
+Le dépôt est construit autour de plusieurs axes complémentaires :
 
 - **OpenShift Administration**
 - **OpenShift Application Development**
 - **GitOps / Argo CD / CI-CD**
 - **Platform Engineering**
-- **SRE / Observabilité**
-- **Sécurité / Gouvernance / Réseau**
-- **Cas d’usage métier sur OpenShift**
+- **Sécurité / RBAC / Network Policies / OIDC**
+- **Observabilité / SRE**
+- **Architecture de plateforme**
+- **Cas d’usage métier et techniques sur OpenShift**
+- **Préparation certifications OpenShift**
 
-Il sert à la fois de :
-
-- support de progression ;
-- base de capitalisation ;
-- vitrine technique ;
-- socle de démonstration en contexte CV / mission / entretien.
+L’objectif n’est pas seulement d’accumuler du contenu, mais de montrer un **niveau de structuration**, une **vision d’architecture** et une **capacité d’industrialisation**.
 
 ---
 
-## Structure du dépôt
+## Structure principale du dépôt
 
 ```text
 .
+├── README.md
+├── architecture/
 ├── certifications/
-├── platform/
-├── use-cases/
-├── common/
-└── portfolio/
+├── docs/
+└── platform/
 ```
 
-Chaque répertoire a un rôle précis.
+### 1. `architecture/`
+Ce répertoire contient les éléments orientés **design**, **référentiel d’architecture** et **valorisation portfolio**.
+
+On y trouve notamment :
+
+- des vues d’ensemble de plateforme ;
+- des architectures de référence ;
+- des documents GitOps, sécurité, observabilité et multi-cluster ;
+- des éléments de synthèse orientés posture architecte.
+
+Ce bloc sert à montrer la capacité à **penser**, **formaliser** et **présenter** une architecture OpenShift au-delà du simple déploiement technique.
 
 ---
 
-## 1. Certifications
+### 2. `certifications/`
+Ce répertoire regroupe les parcours de préparation autour des certifications OpenShift les plus pertinentes pour un positionnement expert / architecte.
 
-Le dossier `certifications/` regroupe les parcours de certification OpenShift cœur et les supports associés.
+Parcours actuellement visés :
 
-Noyau actuel :
+- `ex280/` — administration OpenShift
+- `ex288/` — développement applicatif OpenShift
+- `ex370/` — stockage / data foundation
+- `ex380/` — automation / integration / operations
+- `ex480/` — multi-cluster management / governance
+- `ex482/` — event-driven / Kafka
 
-- `certifications/ex280/` — **OpenShift Administration**
-- `certifications/ex288/` — **OpenShift Application Development**
-- `certifications/ex370/` — **OpenShift Data Foundation**
-- `certifications/ex380/` — **Automation / Integration / Operations**
-- `certifications/ex480/` — **Multi-cluster / Governance**
-- `certifications/ex482/` — **Event-driven / Kafka**
+Selon les pistes, on peut y trouver :
 
-Selon la certification, on peut y trouver :
+- des `README.md` de cadrage ;
+- des supports longs (`book-v1/`) ;
+- des tracks de progression ;
+- des labs ;
+- des checklists ;
+- des notes de préparation ;
+- des diagrammes.
 
-- un `README.md` de cadrage ;
-- un `book-v1/` pour le support long ;
-- un `track/` pratique ;
-- des fichiers de préparation (`PREPARATION.md`) ;
-- des notes (`NOTES.md`) ;
-- des checklists (`CHECKLIST.md`) ;
-- des archives ou versions historiques.
-
-### Finalité de ce dossier
-
-Le but n’est pas uniquement la révision d’examen.
-
-Ce dossier sert aussi à :
-
-- structurer un parcours de montée en compétence ;
-- transformer les révisions en actifs réutilisables ;
-- relier les certifications aux problématiques réelles de plateforme ;
-- montrer une progression crédible vers un profil OpenShift confirmé.
+L’idée est de transformer la préparation certif en **actif de capitalisation** et en **preuve de progression structurée**.
 
 ---
 
-## 2. Platform
+### 3. `docs/`
+Ce répertoire porte la documentation de référence et les synthèses documentaires.
 
-Le dossier `platform/` porte les **blueprints de plateforme réutilisables**.
+Aujourd’hui, il met notamment en avant un travail de structuration autour de la documentation OpenShift officielle, avec une logique de :
 
-On y place les composants structurants d’une plateforme OpenShift moderne, par exemple :
+- cartographie documentaire ;
+- synthèse par domaines fonctionnels ;
+- préparation orientée examen ;
+- clarification des sujets licensing / FinOps ;
+- repérage des thèmes cœur OpenShift.
 
-- GitOps ;
-- Argo CD ;
-- CI/CD ;
-- sécurité ;
-- réseau ;
+Ce bloc est particulièrement utile pour construire une compréhension consolidée d’OpenShift, éviter la dispersion dans la documentation officielle et accélérer la montée en compétence.
+
+---
+
+### 4. `platform/`
+Ce répertoire porte les **artefacts plateforme** et les **blueprints techniques**.
+
+On y place progressivement des éléments tels que :
+
+- GitOps / Argo CD ;
+- configuration cluster de base ;
+- namespaces, quotas, RBAC, policies ;
 - observabilité ;
-- bootstrap d’environnement ;
-- standards de structuration ;
-- patterns d’industrialisation.
+- sécurité ;
+- composants transverses réutilisables.
 
-### Finalité de ce dossier
-
-Le rôle de `platform/` est de fournir des éléments :
-
-- réutilisables ;
-- structurés ;
-- orientés exploitation réelle ;
-- compatibles avec une logique d’architecture et de delivery.
-
-En d’autres termes, `platform/` contient le **socle technique réemployable**.
+La vocation de `platform/` est claire : héberger les éléments les plus proches d’un **socle technique réemployable**.
 
 ---
 
-## 3. Use Cases
+## Mode de lecture recommandé
 
-Le dossier `use-cases/` relie les blueprints à des scénarios concrets.
+Pour découvrir le dépôt rapidement, l’ordre conseillé est :
 
-Exemples de use cases visés :
+### Parcours 1 — Vision globale
+Commencer par :
 
-- **IBM ODM on OpenShift**
-- **Keycloak / SSO / OIDC**
-- **Kafka / architectures event-driven**
-- **SRE / observabilité / runbooks**
-- **OpenShift sur Azure**
-- **déploiements applicatifs industrialisés**
+- `README.md`
+- `architecture/overview/`
+- `architecture/reference-architectures/`
 
-### Finalité de ce dossier
+Ce parcours permet de comprendre la logique d’ensemble du dépôt.
 
-Chaque use case a vocation à documenter :
+### Parcours 2 — Référence OpenShift
+Poursuivre avec :
 
-- le contexte ;
-- l’objectif ;
-- l’architecture cible ;
-- les composants mobilisés ;
-- les contraintes ;
-- les conventions de déploiement ;
-- les points de vigilance ;
-- les liens vers les blueprints de `platform/`.
+- `docs/reference/openshift/`
 
-Le but est de faire le pont entre **architecture**, **plateforme** et **mise en œuvre**.
+Ce parcours donne une vision structurée des grands domaines OpenShift.
 
----
+### Parcours 3 — Blueprints plateforme
+Explorer ensuite :
 
-## 4. Common
+- `platform/`
 
-Le dossier `common/` regroupe les éléments partagés entre plusieurs certifications, plusieurs use cases ou plusieurs blueprints.
+Ce parcours montre la partie la plus orientée industrialisation et GitOps.
 
-On peut y trouver par exemple :
+### Parcours 4 — Progression certif
+Terminer par :
 
-- des scripts ;
-- des templates ;
-- des manifests partagés ;
-- des applications de référence ;
-- des conventions ;
-- des ressources communes.
+- `certifications/`
 
-### Finalité de ce dossier
-
-Éviter la duplication et centraliser les éléments transverses utiles à plusieurs parties du dépôt.
+Ce parcours sert à relier les sujets de plateforme aux compétences attendues sur les parcours Red Hat.
 
 ---
 
-## 5. Portfolio
+## Positionnement du dépôt
 
-Le dossier `portfolio/` est destiné aux éléments de démonstration orientés :
+Ce dépôt vise à se situer à l’intersection de plusieurs postures :
 
-- architecture ;
-- cadrage ;
-- synthèse ;
-- preuve de travail ;
-- valorisation CV / mission / entretien.
+- **ingénierie de plateforme**
+- **architecture OpenShift**
+- **administration / exploitation**
+- **GitOps / CI-CD**
+- **sécurité / gouvernance**
+- **observabilité / SRE**
+- **préparation certif structurée**
 
-On peut y placer :
-
-- des livrables techniques ;
-- des DAT ou dossiers de cadrage ;
-- des synthèses ;
-- des notes de positionnement ;
-- des éléments de storytelling technique ;
-- des démonstrateurs de posture architecte.
-
-### Finalité de ce dossier
-
-Montrer non seulement la capacité à produire du contenu technique, mais aussi à le **structurer**, le **présenter** et le **valoriser**.
-
----
-
-## Principes d’organisation
-
-Ce dépôt suit quelques principes simples :
-
-### 1. Lisibilité
-Chaque dossier doit avoir un rôle clair.
-
-### 2. Réutilisabilité
-Les contenus doivent pouvoir être repris dans un autre contexte : lab, mission, support de préparation, démonstration.
-
-### 3. Séparation des préoccupations
-- `certifications/` pour les parcours certifiants ;
-- `platform/` pour les blueprints techniques ;
-- `use-cases/` pour les scénarios concrets ;
-- `common/` pour le partagé ;
-- `portfolio/` pour la démonstration globale.
-
-### 4. Progression
-Le dépôt doit pouvoir accompagner une montée en compétence du niveau administration / développement vers un niveau plateforme / architecture.
-
-### 5. Cohérence portfolio
-Le dépôt doit rester lisible pour un recruteur, un client ou un pair technique qui le découvre sans contexte préalable.
-
----
-
-## Navigation conseillée
-
-Ordre de lecture recommandé :
-
-1. commencer par `certifications/` ;
-2. poursuivre avec `platform/` ;
-3. explorer ensuite `use-cases/` ;
-4. utiliser `common/` comme socle partagé ;
-5. terminer par `portfolio/` pour la vue globale et démonstrative.
+Il ne prétend pas être un produit fini unique.
+C’est un dépôt de **capitalisation**, de **normalisation** et de **démonstration technique** en cours de consolidation.
 
 ---
 
 ## Public visé
 
-Ce dépôt peut intéresser :
+Ce dépôt peut être utile à :
 
-- les ingénieurs OpenShift ;
-- les consultants plateforme ;
-- les architectes cloud / DevOps ;
-- les profils SRE / GitOps / sécurité ;
-- les personnes préparant des certifications OpenShift ;
-- les recruteurs ou clients souhaitant évaluer un niveau de structuration technique.
+- un ingénieur ou administrateur OpenShift ;
+- un consultant plateforme / DevOps / GitOps ;
+- un architecte cloud / OpenShift / Kubernetes ;
+- un profil SRE intéressé par la plateforme ;
+- une personne préparant une certification OpenShift ;
+- un recruteur ou client souhaitant évaluer un niveau de structuration technique.
+
+---
+
+## Principes directeurs du dépôt
+
+Le dépôt suit quelques principes simples.
+
+### 1. Lisibilité
+Chaque répertoire doit avoir un rôle clair et identifiable.
+
+### 2. Réutilisabilité
+Les contenus doivent pouvoir être repris dans un autre contexte :
+lab, mission, support de préparation, cadrage, démonstration.
+
+### 3. Séparation des préoccupations
+- `architecture/` pour le design et la vision ;
+- `docs/` pour la référence et la synthèse ;
+- `platform/` pour les blueprints techniques ;
+- `certifications/` pour les parcours d’apprentissage.
+
+### 4. Progression
+Le dépôt doit accompagner une trajectoire allant :
+de la pratique OpenShift → vers l’industrialisation → vers l’architecture.
+
+### 5. Crédibilité portfolio
+Le dépôt doit rester compréhensible pour une personne qui le découvre sans contexte préalable.
+
+---
+
+## Ce qui sera consolidé en priorité
+
+La consolidation du dépôt suit une logique volontairement progressive.
+
+Priorités de stabilisation :
+
+1. unification du nom et de l’identité du dépôt ;
+2. harmonisation des README et des intitulés ;
+3. fiabilisation des manifests GitOps / YAML ;
+4. séparation plus nette entre contenu documentaire et artefacts exécutables ;
+5. mise en avant de quelques use cases phares ;
+6. amélioration de la lisibilité portfolio.
+
+---
+
+## Cas d’usage cibles
+
+Les cas d’usage les plus naturels à mettre en avant dans ce dépôt sont :
+
+- plateforme GitOps OpenShift ;
+- sécurité et gouvernance de plateforme ;
+- observabilité / SRE sur OpenShift ;
+- authentification / OIDC / SSO ;
+- workloads cloud-native structurés ;
+- IBM ODM sur OpenShift ;
+- approches event-driven / Kafka ;
+- scénarios multi-cluster / ACM.
+
+Selon l’avancement, certains de ces axes sont déjà documentés, d’autres sont encore en cours de consolidation.
+
+---
+
+## État du dépôt
+
+Statut actuel :
+
+- dépôt principal de consolidation OpenShift ;
+- base documentaire déjà riche ;
+- architecture et références en place ;
+- normalisation et alignement encore en cours sur certaines parties.
+
+Autrement dit :
+le dépôt contient déjà de la matière sérieuse, mais l’objectif est de le rendre progressivement **plus homogène**, **plus démontrable** et **plus crédible comme vitrine technique**.
 
 ---
 
 ## Auteur
 
 **Zidane Djamal**  
-Architecte Cloud & DevOps | Expert OpenShift & Kubernetes
+Architecte technique / plateforme / cloud-native  
+OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
 
-Ce dépôt rassemble des ressources orientées terrain, architecture et industrialisation, construites pour servir à la fois de support de progression et de portfolio technique.
+Ce dépôt rassemble des ressources orientées terrain, architecture, industrialisation et montée en compétence, avec une intention claire : construire un portfolio OpenShift crédible, utile et réutilisable.
+

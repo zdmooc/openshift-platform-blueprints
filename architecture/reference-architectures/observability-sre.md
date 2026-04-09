@@ -1,156 +1,340 @@
-# Observabilité et pratiques SRE – Lab OpenShift
+# Observability and SRE Reference Architecture
 
-## 1. Objectifs
+## 1. Objectif du document
 
-* Disposer d'une vision claire de l'état du cluster et des workloads de lab.
-* S'entraîner à raisonner comme un SRE (fiabilité, alerte, capacité).
-* Préparer un modèle réutilisable pour un SI d'entreprise.
+Ce document décrit l’**architecture de référence observabilité / SRE** du dépôt `openshift-platform-blueprints`.
 
-## 2. Stack observabilité cible
+Son objectif est de préciser comment la plateforme cible intègre :
 
-### 2.1. Metrics
+- la collecte et l’exploitation des métriques ;
+- la centralisation et l’analyse des logs ;
+- l’alerting ;
+- la visibilité sur les composants plateforme et workloads ;
+- une logique SRE adaptée à une plateforme OpenShift structurée.
 
-* Stack native OpenShift :
+Ce document n’est pas un guide d’installation détaillé.
+Il sert de **cadre d’architecture** pour structurer la façon de penser l’observabilité dans le dépôt.
 
-  * Prometheus (cluster + user-workload)
-  * Alertmanager
-  * Thanos (selon configuration)
-* Visualisation :
+---
 
-  * Console OpenShift (dashboards intégrés)
-  * Grafana dédié au lab (optionnel, déployé dans un namespace spécifique)
+## 2. Pourquoi l’observabilité est centrale
 
-### 2.2. Logs
+Dans une plateforme OpenShift crédible, l’observabilité ne doit pas être traitée comme un ajout facultatif.
 
-* Logs plateforme :
+Elle joue plusieurs rôles essentiels :
 
-  * journaux des composants `openshift-*`, `kube-*`.
-* Logs applicatifs :
+- comprendre l’état réel de la plateforme ;
+- superviser les workloads ;
+- détecter les anomalies ;
+- accélérer le diagnostic ;
+- soutenir une posture d’exploitation et de fiabilité ;
+- rendre la plateforme plus démontrable et plus défendable.
 
-  * logs des pods dans les namespaces `ex280-*`, `ex288-*`, etc.
-* Cible de consolidation (au choix dans le lab) :
+Pour le dépôt `openshift-platform-blueprints`, l’observabilité est aussi un marqueur de maturité : elle permet de dépasser un simple lab de déploiement pour entrer dans une logique plus proche de l’exploitation réelle.
 
-  * stack Loki (logs time-series)
-  * ou stack ELK/EFK (Elasticsearch / Kibana / Fluentd/Fluentbit)
+---
 
-### 2.3. Traces (optionnel)
+## 3. Positionnement dans le dépôt
 
-* Possibilité d'ajouter plus tard :
+L’observabilité est un sujet transverse relié à plusieurs zones du dépôt :
 
-  * OpenTelemetry Collector
-  * backend Jaeger/Tempo pour traces distribuées
+- `architecture/` pour le cadre conceptuel et la structuration ;
+- `platform/` pour les artefacts techniques réutilisables ;
+- `docs/` pour la compréhension des briques OpenShift associées ;
+- `certifications/` pour les labs et scénarios pratiques ;
+- `use-cases/` lorsque des composants métiers ou techniques doivent être supervisés.
 
-## 3. Flux observabilité – vue d’ensemble
+Ce document donne la vue d’architecture générale. Les implémentations détaillées doivent rester ailleurs.
+
+---
+
+## 4. Principes directeurs
+
+### 4.1. Observabilité pensée dès la conception
+L’observabilité doit être considérée comme une composante native de la plateforme, pas comme une correction tardive.
+
+### 4.2. Couvrir plateforme et workloads
+Une bonne observabilité doit rendre visibles à la fois :
+
+- les composants transverses ;
+- les espaces applicatifs ;
+- les démonstrateurs ;
+- les dépendances importantes.
+
+### 4.3. Lisibilité avant sophistication
+Il vaut mieux une chaîne simple, compréhensible et exploitable qu’une stack trop ambitieuse mais peu maîtrisée.
+
+### 4.4. Progression réaliste
+Le dépôt doit pouvoir partir d’un niveau simple, puis monter progressivement vers des scénarios plus complets.
+
+### 4.5. Lien avec SRE
+L’observabilité doit soutenir une logique SRE : indicateurs, signaux utiles, alertes pertinentes et diagnostic plus rapide.
+
+---
+
+## 5. Domaines couverts
+
+L’architecture observabilité / SRE du dépôt couvre principalement :
+
+- métriques ;
+- logs ;
+- alerting ;
+- tableaux de bord ;
+- principes de supervision ;
+- premiers éléments de raisonnement SRE.
+
+Elle ne couvre pas exhaustivement :
+
+- toute la chaîne APM avancée ;
+- la totalité des pratiques d’astreinte ;
+- les runbooks détaillés de tous les incidents ;
+- un dispositif SOC ou SIEM complet.
+
+---
+
+## 6. Vue de haut niveau
 
 ```mermaid
 flowchart LR
-  Pod --> Metrics[Metrics]
-  Pod --> Logs[Logs]
-  Metrics --> Prom[Prometheus]
-  Prom --> Alert[Alertmanager]
-  Metrics --> Dash[Dashboards Grafana/OCP]
-  Logs --> LogStore[(Store logs)]
-  LogStore --> Kibana[UI Logs / Recherche]
+    Workloads[Workloads applicatifs et techniques] --> Metrics[Métriques]
+    Workloads --> Logs[Logs]
+    Platform[Composants plateforme] --> Metrics
+    Platform --> Logs
+    Metrics --> Monitoring[Monitoring / Alerting / Dashboards]
+    Logs --> Logging[Collecte / Agrégation / Consultation]
+    Monitoring --> SRE[Diagnostic / Fiabilité / SLO]
+    Logging --> SRE
+    Monitoring --> Operators[Ops / Admin / Architecte]
+    Logging --> Operators
 ```
 
-* Les pods exposent :
+Cette vue montre que l’observabilité ne se réduit pas à des outils : elle relie la plateforme, les workloads, l’exploitation et la fiabilité.
 
-  * endpoints `/metrics` (Prometheus),
-  * logs stdout/stderr collectés par l’agent de logs.
-* Prometheus scrape les cibles (via `ServiceMonitor` / `PodMonitor`).
-* Alertmanager gère les alertes basées sur les règles.
-* Les logs sont indexés et consultés via une UI (Kibana, Grafana Loki, etc.).
+---
 
-## 4. KPIs et signaux SRE
+## 7. Bloc métriques
 
-On se base sur les “quatre signaux d’or” :
+### 7.1. Rôle
+Le bloc métriques doit fournir une vision chiffrée de l’état de la plateforme et des workloads.
 
-1. **Latence**
+Il permet notamment de suivre :
 
-   * temps de réponse HTTP (p50, p90, p99)
-   * erreurs de timeouts
+- la santé des composants ;
+- les consommations de ressources ;
+- les erreurs ;
+- certaines tendances de performance ;
+- le comportement général du système.
 
-2. **Trafic**
+### 7.2. Niveaux de visibilité attendus
+Les métriques doivent pouvoir couvrir progressivement :
 
-   * requêtes par seconde (RPS)
-   * charge sur les services principaux
+- le cluster et ses composants principaux ;
+- les namespaces et workloads ;
+- les applications instrumentées ;
+- certaines briques transverses comme GitOps, IAM ou observabilité elle-même.
 
-3. **Erreurs**
+### 7.3. Place dans le dépôt
+Dans le dépôt, les éléments liés aux métriques peuvent se matérialiser par :
 
-   * taux d’erreurs HTTP (4xx, 5xx)
-   * exceptions applicatives majeures
+- documentation d’architecture ;
+- manifests de type `ServiceMonitor` ou assimilés ;
+- dashboards ;
+- cas d’usage instrumentés.
 
-4. **Saturation**
+---
 
-   * utilisation CPU/mémoire des pods
-   * saturation des quotas (`ResourceQuota`), épuisement des PVC
+## 8. Bloc logs
 
-Exemples d’objectifs SLO pour le lab (à adapter en prod) :
+### 8.1. Rôle
+Le bloc logs permet de centraliser et consulter les événements textuels émis par les workloads et certains composants techniques.
 
-* Disponibilité HTTP : 99,0 % sur 30 jours pour les apps de lab importantes.
-* Latence p95 < 500 ms sur les endpoints principaux.
-* Taux d’erreurs 5xx < 1 %.
+Il est particulièrement utile pour :
 
-## 5. Intégration observabilité dans le dépôt Git
+- comprendre les échecs applicatifs ;
+- suivre les démarrages, arrêts et erreurs ;
+- diagnostiquer des comportements réseau ou sécurité ;
+- conserver une lecture exploitable de ce qui se passe réellement.
 
-Dans ce dépôt, les objets liés à l’observabilité sont regroupés dans :
+### 8.2. Objectif architectural
+Le dépôt doit montrer une approche claire de la journalisation :
 
-```text
-platform/
-  observability/
-    servicemonitors/
-    dashboards/
-```
+- les logs ne doivent pas rester uniquement enfermés dans chaque pod ;
+- leur collecte doit être pensée comme une brique de plateforme ;
+- leur consultation doit s’inscrire dans une logique d’exploitation structurée.
 
-* `servicemonitors/` :
+### 8.3. Niveau de maturité attendu
+Un niveau simple et crédible peut suffire au départ, à condition de rester cohérent et démontrable.
 
-  * `ServiceMonitor` et `PodMonitor` pour les applications de lab.
-* `dashboards/` :
+---
 
-  * fichiers JSON de dashboards Grafana ou modèles (à ajouter progressivement).
+## 9. Bloc alerting
 
-Ces manifests pourront être gérés par GitOps via `platform/gitops/`.
+### 9.1. Rôle
+L’alerting sert à transformer des signaux observables en événements exploitables par l’exploitation ou l’architecture.
 
-## 6. Exemple de stratégie pour une application de lab
+### 9.2. Bonnes pratiques de cadrage
+Le dépôt doit éviter deux extrêmes :
 
-Pour une application HTTP de lab (`ex280-app1` par exemple) :
+- trop peu d’alertes utiles ;
+- trop d’alertes générant du bruit.
 
-1. **Metrics**
+### 9.3. Objectif réaliste
+À ce stade, l’objectif n’est pas de produire un catalogue exhaustif d’alertes, mais de montrer :
 
-   * exposer `/metrics` dans le container (Prometheus client).
-   * créer un `ServiceMonitor` dans `platform/observability/servicemonitors/`.
+- une logique de seuils ou signaux pertinents ;
+- une articulation avec monitoring et logs ;
+- une capacité à soutenir le diagnostic.
 
-2. **Logs**
+---
 
-   * s’assurer que les logs vont sur stdout/stderr.
-   * taguer le namespace/app avec des labels pour le routing dans la stack logs.
+## 10. Tableaux de bord
 
-3. **Dashboards**
+### 10.1. Rôle
+Les tableaux de bord servent à rendre la plateforme lisible rapidement pour :
 
-   * créer un dashboard Grafana (JSON) avec :
+- l’exploitation ;
+- l’administration ;
+- l’architecture ;
+- la démonstration de valeur.
 
-     * CPU/mémoire pod
-     * HTTP requests total
-     * HTTP 5xx
-     * latence p95
+### 10.2. Types de vues utiles
+Les vues les plus utiles dans le dépôt sont celles qui permettent de comprendre :
 
-4. **Alertes**
+- l’état général de la plateforme ;
+- la santé d’un workload ou d’un namespace ;
+- certaines métriques de capacité ;
+- des indicateurs liés à des use cases ciblés.
 
-   * ajouter plus tard des règles Prometheus :
+### 10.3. Valeur portfolio
+Des dashboards simples mais pertinents renforcent fortement la crédibilité du dépôt, car ils montrent une capacité à rendre la plateforme observable et exploitable.
 
-     * `HighErrorRate`
-     * `HighLatency`
-     * `PodRestartingTooOften`
+---
 
-## 7. Roadmap observabilité pour ce lab
+## 11. Notions SRE portées par le dépôt
 
-1. Utiliser la console OCP pour observer les métriques et dashboards natifs.
-2. Ajouter un premier `ServiceMonitor` pour une app de test :
+### 11.1. Finalité
+Le dépôt n’a pas besoin de devenir un manuel SRE complet.
+En revanche, il gagne à montrer une lecture SRE claire de la plateforme.
 
-   * commit dans `platform/observability/servicemonitors/`.
-3. Ajouter au moins un dashboard personnalisé :
+### 11.2. Axes pertinents
+Les notions SRE les plus utiles à faire apparaître sont :
 
-   * commit JSON dans `platform/observability/dashboards/`.
-4. Définir 2–3 SLO simples pour une application importante du lab.
-5. Documenter dans ce fichier l’évolution de la stack (ajout de Loki, etc.).
+- disponibilité ;
+- latence ;
+- erreurs ;
+- saturation ;
+- signaux utiles au diagnostic ;
+- premiers raisonnements autour des SLO.
+
+### 11.3. Valeur démontrée
+L’objectif est de montrer qu’une plateforme OpenShift bien pensée doit pouvoir être pilotée non seulement par le déploiement, mais aussi par des signaux de fiabilité et d’exploitation.
+
+---
+
+## 12. Articulation avec GitOps
+
+GitOps et observabilité sont complémentaires.
+
+GitOps peut porter une partie des composants d’observabilité, par exemple :
+
+- ressources de monitoring ;
+- objets de collecte ;
+- dashboards ;
+- configurations réutilisables.
+
+L’observabilité peut en retour rendre plus lisible le fonctionnement de la chaîne GitOps et des workloads qu’elle pilote.
+
+---
+
+## 13. Articulation avec la sécurité
+
+L’observabilité aide aussi sur les sujets sécurité en apportant :
+
+- visibilité sur les erreurs d’accès ;
+- compréhension des flux ;
+- diagnostic des échecs de configuration ;
+- meilleure lecture des comportements anormaux.
+
+Elle ne remplace pas la sécurité, mais elle améliore la capacité à la piloter et à la comprendre.
+
+---
+
+## 14. Articulation avec les use cases
+
+Les use cases du dépôt doivent progressivement s’appuyer sur l’observabilité pour devenir crédibles.
+
+Cela est particulièrement utile pour des scénarios tels que :
+
+- IAM / OIDC / Keycloak ;
+- IBM ODM sur OpenShift ;
+- GitOps platform baseline ;
+- workloads applicatifs démonstratifs ;
+- approches event-driven / Kafka.
+
+Un use case devient plus convaincant lorsqu’il n’est pas seulement déployé, mais aussi observable.
+
+---
+
+## 15. Limites et honnêteté architecturale
+
+Le dépôt doit rester honnête sur son niveau de maturité.
+
+Ce document décrit une cible crédible d’observabilité / SRE, mais cela ne signifie pas que :
+
+- tous les dashboards sont finalisés ;
+- toutes les alertes sont définies ;
+- la chaîne complète de logs est stabilisée ;
+- un modèle d’exploitation complet est déjà en place.
+
+La valeur du document est de montrer une **trajectoire claire** et une **lecture structurée**.
+
+---
+
+## 16. Trajectoire cible
+
+### Étape 1 — Visibilité de base
+- premières métriques ;
+- premières ressources de collecte ;
+- premiers workloads instrumentés ;
+- lecture simple de l’état de la plateforme.
+
+### Étape 2 — Structuration
+- séparation claire monitoring / logging ;
+- dashboards cohérents ;
+- alerting initial ;
+- meilleure lisibilité par namespace ou use case.
+
+### Étape 3 — Montée en maturité
+- raisonnement SRE plus visible ;
+- meilleure corrélation métriques / logs ;
+- supervision plus ciblée des use cases.
+
+### Étape 4 — Projection avancée
+- enrichissement des dashboards ;
+- extension vers scénarios plus industriels ;
+- observabilité plus intégrée à la gouvernance plateforme.
+
+---
+
+## 17. Conclusion
+
+L’architecture observabilité / SRE décrite ici doit être comprise comme une **brique structurante** de `openshift-platform-blueprints`.
+
+Elle cherche à montrer qu’une plateforme OpenShift crédible repose aussi sur sa capacité à être :
+
+- visible ;
+- compréhensible ;
+- supervisée ;
+- diagnostiquerable ;
+- pilotable dans une logique de fiabilité.
+
+Cette brique renforce à la fois la qualité technique du dépôt, sa valeur pédagogique et sa crédibilité comme portfolio.
+
+---
+
+## Auteur
+
+**Zidane Djamal**  
+Architecte technique / plateforme / cloud-native  
+OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
 
