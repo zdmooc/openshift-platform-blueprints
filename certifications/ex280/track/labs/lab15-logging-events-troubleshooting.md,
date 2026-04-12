@@ -1,0 +1,38 @@
+# Lab15 — Logging, Events & Troubleshooting
+
+## Objectif
+
+Construire une routine de diagnostic simple, rapide et réutilisable pour EX280 :
+
+- identifier un déploiement cassé ;
+- utiliser `oc get`, `oc describe`, `oc logs` et `oc get events` dans le bon ordre ;
+- reconnaître quelques causes fréquentes ;
+- corriger puis valider le retour à un état stable.
+
+Ce lab est volontairement **court, ciblé et rejouable**.
+Il complète le capstone sans le remplacer.
+
+---
+
+## Objectifs EX280 couverts
+
+- Examiner l’état des ressources du cluster et du namespace
+- Utiliser les logs et les événements pour diagnostiquer
+- Troubleshooter des applications
+- Corriger une erreur de déploiement
+- Valider un retour à l’état `Running`
+
+---
+
+## Pré-requis
+
+- `oc` connecté
+- CRC / OpenShift Local fonctionnel
+- droits suffisants pour créer un projet
+- labs précédents déjà parcourus
+
+```bash
+export LAB=15
+export NS=ex280-lab${LAB}-zidane
+oc get project "$NS" || oc new-project "$NS"
+oc project "$NS"
