@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kustom-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kustom-web
+  template:
+    metadata:
+      labels:
+        app: kustom-web
+    spec:
+      containers:
+      - name: kustom-web
+        image: registry.access.redhat.com/ubi8/httpd-24
