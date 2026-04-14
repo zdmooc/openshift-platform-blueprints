@@ -1,6 +1,0 @@
-apiVersion: v2
-name: basic-node
-description: Simple chart used for EX288 labs
-type: application
-version: 0.1.0
-appVersion: "1.0.0"

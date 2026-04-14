@@ -1,8 +1,0 @@
-- [ ] Projet créé
-- [ ] Service exposé
-- [ ] Route testée
-- [ ] ConfigMap et Secret injectés
-- [ ] Build réussi
-- [ ] Template appliqué
-- [ ] Pipeline corrigé
-- [ ] RBAC vérifié

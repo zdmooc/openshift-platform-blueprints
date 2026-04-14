@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-node-k
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          env:
+            - name: APP_MESSAGE
+              value: hello from kustomize dev

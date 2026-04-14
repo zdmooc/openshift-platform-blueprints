@@ -1,0 +1,6 @@
+FROM registry.access.redhat.com/ubi9/nodejs-20:latest
+WORKDIR /opt/app-root/src
+COPY package.json server.js ./
+RUN npm install --omit=dev || true
+EXPOSE 8080
+CMD ["node", "server.js"]

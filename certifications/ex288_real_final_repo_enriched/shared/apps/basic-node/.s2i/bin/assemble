@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cp -r /tmp/src/. /opt/app-root/src/
+cd /opt/app-root/src
+npm install --omit=dev || true

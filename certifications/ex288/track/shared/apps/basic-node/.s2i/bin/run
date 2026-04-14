@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-cd /opt/app-root/src
-echo "[run] démarrage de l'application"
-exec npm start

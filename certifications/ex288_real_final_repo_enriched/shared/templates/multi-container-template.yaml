@@ -1,0 +1,57 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: multi-container-template
+parameters:
+  - name: APP_NAME
+    value: multi-node
+  - name: IMAGE
+    value: image-registry.openshift-image-registry.svc:5000/CHANGE_ME/basic-node:latest
+  - name: MESSAGE
+    value: hello multi template
+objects:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: ${APP_NAME}
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: ${APP_NAME}
+      template:
+        metadata:
+          labels:
+            app: ${APP_NAME}
+        spec:
+          volumes:
+            - name: shared
+              emptyDir: {}
+          initContainers:
+            - name: init-writer
+              image: registry.access.redhat.com/ubi9/ubi-minimal
+              command: ["/bin/sh", "-c"]
+              args: ["echo ${MESSAGE} > /shared/message.txt"]
+              volumeMounts:
+                - name: shared
+                  mountPath: /shared
+          containers:
+            - name: app
+              image: ${IMAGE}
+              env:
+                - name: SHARED_FILE
+                  value: /shared/message.txt
+                - name: APP_MESSAGE
+                  value: ${MESSAGE}
+              ports:
+                - containerPort: 8080
+              volumeMounts:
+                - name: shared
+                  mountPath: /shared
+            - name: sidecar
+              image: registry.access.redhat.com/ubi9/ubi-minimal
+              command: ["/bin/sh", "-c"]
+              args: ["while true; do cat /shared/message.txt; sleep 30; done"]
+              volumeMounts:
+                - name: shared
+                  mountPath: /shared
