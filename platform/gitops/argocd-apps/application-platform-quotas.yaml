@@ -1,20 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-name: platform-quotas
-namespace: openshift-gitops
+  name: platform-quotas
+  namespace: openshift-gitops
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
 spec:
-project: default
-source:
-repoURL: [https://github.com/zdmooc/rh-openshift-architect-lab.git](https://github.com/zdmooc/rh-openshift-architect-lab.git)
-targetRevision: main
-path: platform/gitops/cluster-config/quotas
-destination:
-server: [https://kubernetes.default.svc](https://kubernetes.default.svc)
-namespace: openshift-gitops
-syncPolicy:
-automated:
-prune: true
-selfHeal: true
-syncOptions:
-- CreateNamespace=true
+  project: default
+  source:
+    repoURL: https://github.com/zdmooc/openshift-platform-blueprints.git
+    targetRevision: main
+    path: platform/gitops/cluster-config/quotas
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-gitops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
