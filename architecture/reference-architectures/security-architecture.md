@@ -368,3 +368,17 @@ C’est cette cohérence qui rend la sécurité lisible, défendable et utile da
 Architecte technique / plateforme / cloud-native  
 OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
 
+
+---
+
+## Portfolio ownership boundary — 2026-10-01
+
+This document owns the **OpenShift security architecture reference**: RBAC, SCC/Pod Security, NetworkPolicy, identity boundaries, secrets patterns and policy concepts.
+
+Specialist/runtime ownership:
+
+- Keycloak / IAM deep implementation: `keycloak-enterprise-roadmap-v7`;
+- shared identity/secrets/policy contracts: `shared-platform-services-openshift`;
+- cluster security lifecycle and operational controls: `k8s-openshift-cluster-factory`.
+
+Security examples in this repository are reference assets, not production security claims.
