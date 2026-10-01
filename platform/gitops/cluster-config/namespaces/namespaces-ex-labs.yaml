@@ -1,68 +1,62 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-name: ex280-lab
-labels:
-env: lab
-track: ex280
-owner: zidane
--------------
-
+  name: ex280-lab
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
+    platform.mayabank.example/purpose: certification-lab
+    platform.mayabank.example/track: ex280
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-name: ex288-lab
-labels:
-env: lab
-track: ex288
-owner: zidane
--------------
-
+  name: ex288-lab
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
+    platform.mayabank.example/purpose: certification-lab
+    platform.mayabank.example/track: ex288
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-name: ex370-lab
-labels:
-env: lab
-track: ex370
-owner: zidane
--------------
-
+  name: ex370-lab
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
+    platform.mayabank.example/purpose: certification-lab
+    platform.mayabank.example/track: ex370
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-name: ex380-lab
-labels:
-env: lab
-track: ex380
-owner: zidane
--------------
-
+  name: ex380-lab
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
+    platform.mayabank.example/purpose: certification-lab
+    platform.mayabank.example/track: ex380
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-name: ex480-lab
-labels:
-env: lab
-track: ex480
-owner: zidane
--------------
-
+  name: ex480-lab
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
+    platform.mayabank.example/purpose: certification-lab
+    platform.mayabank.example/track: ex480
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-name: ex482-lab
-labels:
-env: lab
-track: ex482
-owner: zidane
--------------
-
+  name: ex482-lab
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
+    platform.mayabank.example/purpose: certification-lab
+    platform.mayabank.example/track: ex482
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-name: sandbox-lab
-labels:
-env: sandbox
-track: misc
-owner: zidane
+  name: sandbox-lab
+  labels:
+    app.kubernetes.io/part-of: openshift-platform-blueprints
+    platform.mayabank.example/purpose: certification-lab
+    platform.mayabank.example/track: sandbox
