@@ -1,271 +1,139 @@
 # OpenShift Platform Blueprints
 
-Dépôt principal de démonstration technique consacré à **Red Hat OpenShift**, au **platform engineering**, au **GitOps**, à la **sécurité**, à l’**observabilité** et à la **structuration de cas d’usage cloud-native**.
+**Canonical role:** OpenShift Architecture / Knowledge / Standards Reference  
+**Portfolio status:** KEEP / REFERENCE / ACTIVE CLEANUP  
+**Last governance review:** 2026-10-01
 
-Ce dépôt a une double finalité :
+This repository is the OpenShift architecture and standards reference of the MayaBank portfolio. It connects platform architecture, reusable reference blueprints and structured OpenShift learning material without pretending to own every runtime capability.
 
-- servir de **portfolio technique** orienté OpenShift ;
-- capitaliser des **blueprints**, des **documents d’architecture**, des **supports de préparation**, des **labs** et des **cas concrets** réutilisables en contexte mission, entretien ou montée en compétence.
+## What this repository owns
 
----
+- OpenShift platform architecture and governance;
+- namespace/project tenancy patterns;
+- ResourceQuota / LimitRange standards;
+- RBAC, SCC and Pod Security architecture;
+- NetworkPolicy patterns;
+- workload reliability patterns: probes, PDB, HPA, requests/limits;
+- Routes/Ingress and service exposure;
+- storage/CSI/ODF reference concepts;
+- Operators / OLM;
+- GitOps architecture and small validated Argo CD examples;
+- observability/SRE architecture and ServiceMonitor examples;
+- multi-cluster / ACM reference architecture;
+- OpenShift certification learning tracks.
 
-## Objectif du dépôt
+## What it does not own
 
-`openshift-platform-blueprints` n’est pas un simple dépôt de notes.
+| Capability | Canonical repository |
+|---|---|
+| Cluster provisioning, lifecycle, upgrades, N2/N3 | `zdmooc/k8s-openshift-cluster-factory` |
+| Shared platform runtime services | `zdmooc/shared-platform-services-openshift` |
+| Argo CD deep expertise and runtime labs | `zdmooc/argocd-expert-pack` |
+| Keycloak deep expertise and runtime labs | `zdmooc/keycloak-enterprise-roadmap-v7` |
+| Workload migration assessment and execution patterns | `zdmooc/openshift-migration-framework` |
+| Kubernetes internals / manual bootstrap | `zdmooc/kubernetes-the-hard-way-vagrant-architect-v29` |
+| Multi-cloud KTHW provider adapters | `zdmooc/kubernetes-the-hard-way-multicloud` |
+| WebSphere -> OpenShift assessment | `zdmooc/assessment-was-openshift` |
 
-Il est conçu pour démontrer une capacité réelle à :
-
-- structurer une plateforme OpenShift lisible et industrialisable ;
-- documenter une architecture de manière exploitable ;
-- relier théorie, certification, exploitation et design de plateforme ;
-- produire des actifs techniques réutilisables pour du **lab**, du **portfolio** ou de la **préparation mission** ;
-- évoluer d’une logique de pratique individuelle vers une posture **Architecte / Expert OpenShift**.
-
----
-
-## Ce que le dépôt cherche à démontrer
-
-Le dépôt est construit autour de plusieurs axes complémentaires :
-
-- **OpenShift Administration**
-- **OpenShift Application Development**
-- **GitOps / Argo CD / CI-CD**
-- **Platform Engineering**
-- **Sécurité / RBAC / Network Policies / OIDC**
-- **Observabilité / SRE**
-- **Architecture de plateforme**
-- **Cas d’usage métier et techniques sur OpenShift**
-- **Préparation certifications OpenShift**
-
-L’objectif n’est pas seulement d’accumuler du contenu, mais de montrer un **niveau de structuration**, une **vision d’architecture** et une **capacité d’industrialisation**.
-
----
-
-## Structure principale du dépôt
+## Repository structure
 
 ```text
-.
-├── README.md
-├── architecture/
-├── certifications/
-├── docs/
-└── platform/
+architecture/       platform views and reference architectures
+docs/
+  governance/       scope, ownership and claim model
+  reference/        OpenShift reference knowledge
+platform/           small reference manifests and GitOps examples
+certifications/     EX280 / EX288 / EX370 / EX380 / EX480 / EX482 tracks
+evidence/           validation and claim/evidence information
+.github/workflows/  repository validation
 ```
 
-### 1. `architecture/`
-Ce répertoire contient les éléments orientés **design**, **référentiel d’architecture** et **valorisation portfolio**.
+## Recommended reading path
 
-On y trouve notamment :
+1. `docs/governance/REPOSITORY_SCOPE.md`
+2. `architecture/overview/platform-overview.md`
+3. `architecture/reference-architectures/`
+4. `docs/reference/openshift/`
+5. `platform/` for validated examples
+6. `certifications/` for learning tracks
 
-- des vues d’ensemble de plateforme ;
-- des architectures de référence ;
-- des documents GitOps, sécurité, observabilité et multi-cluster ;
-- des éléments de synthèse orientés posture architecte.
+## Portfolio layering
 
-Ce bloc sert à montrer la capacité à **penser**, **formaliser** et **présenter** une architecture OpenShift au-delà du simple déploiement technique.
+```text
+openshift-platform-blueprints
+        Architecture / standards
+                 |
+                 v
+k8s-openshift-cluster-factory
+        Cluster lifecycle / CaaS
+                 |
+                 v
+shared-platform-services-openshift
+        Shared platform capabilities
+                 |
+                 v
+Specialized platforms
+        Data / MQ / Kafka / AI
+                 |
+                 v
+Business products
+        Payments / Cards / etc.
+```
 
----
+## Evidence model
 
-### 2. `certifications/`
-Ce répertoire regroupe les parcours de préparation autour des certifications OpenShift les plus pertinentes pour un positionnement expert / architecte.
+Every claim must use one of the following levels:
 
-Parcours actuellement visés :
+`REFERENCE | IMPLEMENTED | STATIC_VALIDATED | CI_RUNTIME_PROVEN | CRC_RUNTIME_PROVEN | MULTINODE_PROVEN | PRODUCTION_REFERENCE | STALE_REQUALIFICATION_REQUIRED`.
 
-- `ex280/` — administration OpenShift
-- `ex288/` — développement applicatif OpenShift
-- `ex370/` — stockage / data foundation
-- `ex380/` — automation / integration / operations
-- `ex480/` — multi-cluster management / governance
-- `ex482/` — event-driven / Kafka
+See `docs/governance/ASSET_STATUS_MODEL.md`.
 
-Selon les pistes, on peut y trouver :
+A manifest committed to Git is not automatically a deployable or runtime-proven asset.
 
-- des `README.md` de cadrage ;
-- des supports longs (`book-v1/`) ;
-- des tracks de progression ;
-- des labs ;
-- des checklists ;
-- des notes de préparation ;
-- des diagrammes.
+## Executable examples
 
-L’idée est de transformer la préparation certif en **actif de capitalisation** et en **preuve de progression structurée**.
+The `platform/` directory contains **small reference examples**, not a competing common platform implementation. Repository CI validates their syntax/rendering where possible.
 
----
+Operational implementations belong to their canonical repositories.
 
-### 3. `docs/`
-Ce répertoire porte la documentation de référence et les synthèses documentaires.
+## Certification tracks
 
-Aujourd’hui, il met notamment en avant un travail de structuration autour de la documentation OpenShift officielle, avec une logique de :
+The learning area currently covers:
 
-- cartographie documentaire ;
-- synthèse par domaines fonctionnels ;
-- préparation orientée examen ;
-- clarification des sujets licensing / FinOps ;
-- repérage des thèmes cœur OpenShift.
+- EX280 — OpenShift Administration;
+- EX288 — application development;
+- EX370 — OpenShift Data Foundation / storage;
+- EX380 — automation, identity, backup, monitoring and GitOps topics;
+- EX480 — multi-cluster management/governance;
+- EX482 — event-driven / Kafka-related learning.
 
-Ce bloc est particulièrement utile pour construire une compréhension consolidée d’OpenShift, éviter la dispersion dans la documentation officielle et accélérer la montée en compétence.
+Certification material is explicitly a **learning/reference asset**. It is not a certification claim.
 
----
+## Principles
 
-### 4. `platform/`
-Ce répertoire porte les **artefacts plateforme** et les **blueprints techniques**.
+1. One canonical owner per capability.
+2. Architecture here; operational implementation in the owning repository.
+3. Reuse links/contracts instead of copying whole platforms.
+4. No real credentials or customer data.
+5. Validation status must match evidence.
+6. Small executable examples are kept only when they clarify a platform standard.
 
-On y place progressivement des éléments tels que :
+## Current cleanup program
 
-- GitOps / Argo CD ;
-- configuration cluster de base ;
-- namespaces, quotas, RBAC, policies ;
-- observabilité ;
-- sécurité ;
-- composants transverses réutilisables.
+The 2026-10-01 O1 cleanup performs:
 
-La vocation de `platform/` est claire : héberger les éléments les plus proches d’un **socle technique réemployable**.
+- repository scope and ownership clarification;
+- YAML/GitOps repair;
+- architecture/reference normalization;
+- cross-repository boundaries;
+- automated validation;
+- certification-track normalization;
+- final evidence/index baseline.
 
----
+The governing portfolio decision is documented in `zdmooc/cadrage_202682030`, decision D-075.
 
-## Mode de lecture recommandé
-
-Pour découvrir le dépôt rapidement, l’ordre conseillé est :
-
-### Parcours 1 — Vision globale
-Commencer par :
-
-- `README.md`
-- `architecture/overview/`
-- `architecture/reference-architectures/`
-
-Ce parcours permet de comprendre la logique d’ensemble du dépôt.
-
-### Parcours 2 — Référence OpenShift
-Poursuivre avec :
-
-- `docs/reference/openshift/`
-
-Ce parcours donne une vision structurée des grands domaines OpenShift.
-
-### Parcours 3 — Blueprints plateforme
-Explorer ensuite :
-
-- `platform/`
-
-Ce parcours montre la partie la plus orientée industrialisation et GitOps.
-
-### Parcours 4 — Progression certif
-Terminer par :
-
-- `certifications/`
-
-Ce parcours sert à relier les sujets de plateforme aux compétences attendues sur les parcours Red Hat.
-
----
-
-## Positionnement du dépôt
-
-Ce dépôt vise à se situer à l’intersection de plusieurs postures :
-
-- **ingénierie de plateforme**
-- **architecture OpenShift**
-- **administration / exploitation**
-- **GitOps / CI-CD**
-- **sécurité / gouvernance**
-- **observabilité / SRE**
-- **préparation certif structurée**
-
-Il ne prétend pas être un produit fini unique.
-C’est un dépôt de **capitalisation**, de **normalisation** et de **démonstration technique** en cours de consolidation.
-
----
-
-## Public visé
-
-Ce dépôt peut être utile à :
-
-- un ingénieur ou administrateur OpenShift ;
-- un consultant plateforme / DevOps / GitOps ;
-- un architecte cloud / OpenShift / Kubernetes ;
-- un profil SRE intéressé par la plateforme ;
-- une personne préparant une certification OpenShift ;
-- un recruteur ou client souhaitant évaluer un niveau de structuration technique.
-
----
-
-## Principes directeurs du dépôt
-
-Le dépôt suit quelques principes simples.
-
-### 1. Lisibilité
-Chaque répertoire doit avoir un rôle clair et identifiable.
-
-### 2. Réutilisabilité
-Les contenus doivent pouvoir être repris dans un autre contexte :
-lab, mission, support de préparation, cadrage, démonstration.
-
-### 3. Séparation des préoccupations
-- `architecture/` pour le design et la vision ;
-- `docs/` pour la référence et la synthèse ;
-- `platform/` pour les blueprints techniques ;
-- `certifications/` pour les parcours d’apprentissage.
-
-### 4. Progression
-Le dépôt doit accompagner une trajectoire allant :
-de la pratique OpenShift → vers l’industrialisation → vers l’architecture.
-
-### 5. Crédibilité portfolio
-Le dépôt doit rester compréhensible pour une personne qui le découvre sans contexte préalable.
-
----
-
-## Ce qui sera consolidé en priorité
-
-La consolidation du dépôt suit une logique volontairement progressive.
-
-Priorités de stabilisation :
-
-1. unification du nom et de l’identité du dépôt ;
-2. harmonisation des README et des intitulés ;
-3. fiabilisation des manifests GitOps / YAML ;
-4. séparation plus nette entre contenu documentaire et artefacts exécutables ;
-5. mise en avant de quelques use cases phares ;
-6. amélioration de la lisibilité portfolio.
-
----
-
-## Cas d’usage cibles
-
-Les cas d’usage les plus naturels à mettre en avant dans ce dépôt sont :
-
-- plateforme GitOps OpenShift ;
-- sécurité et gouvernance de plateforme ;
-- observabilité / SRE sur OpenShift ;
-- authentification / OIDC / SSO ;
-- workloads cloud-native structurés ;
-- IBM ODM sur OpenShift ;
-- approches event-driven / Kafka ;
-- scénarios multi-cluster / ACM.
-
-Selon l’avancement, certains de ces axes sont déjà documentés, d’autres sont encore en cours de consolidation.
-
----
-
-## État du dépôt
-
-Statut actuel :
-
-- dépôt principal de consolidation OpenShift ;
-- base documentaire déjà riche ;
-- architecture et références en place ;
-- normalisation et alignement encore en cours sur certaines parties.
-
-Autrement dit :
-le dépôt contient déjà de la matière sérieuse, mais l’objectif est de le rendre progressivement **plus homogène**, **plus démontrable** et **plus crédible comme vitrine technique**.
-
----
-
-## Auteur
+## Author
 
 **Zidane Djamal**  
-Architecte technique / plateforme / cloud-native  
-OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
-
-Ce dépôt rassemble des ressources orientées terrain, architecture, industrialisation et montée en compétence, avec une intention claire : construire un portfolio OpenShift crédible, utile et réutilisable.
-
+Architecture technique / plateforme / cloud-native  
+OpenShift · Kubernetes · GitOps · Security · Observability · Platform Engineering
