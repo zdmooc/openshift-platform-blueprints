@@ -3,7 +3,7 @@
 **Status:** STALE_REQUALIFICATION_REQUIRED  
 **Superseded on:** 2026-10-01
 
-This document belonged to the former `rh-openshift-architect-lab` organization of the repository.
+This document belonged to the former the former repository identity organization of the repository.
 
 Its historical content remains available in Git history, but it must no longer be used as the current repository strategy because:
 
