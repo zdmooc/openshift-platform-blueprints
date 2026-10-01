@@ -357,3 +357,15 @@ Cette brique renforce la crédibilité du dépôt dès lors qu’elle reste simp
 Architecte technique / plateforme / cloud-native  
 OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
 
+
+---
+
+## Portfolio ownership boundary — 2026-10-01
+
+This document owns the **multi-cluster architecture reference** only.
+
+Cluster provisioning, lifecycle, upgrade and provider-specific implementation belong to `k8s-openshift-cluster-factory`.
+
+Kubernetes internals and provider portability learning remain in the KTHW repositories.
+
+A diagram showing management/build/preprod/prod clusters is a reference architecture; it is not a runtime claim unless evidence is linked explicitly.
