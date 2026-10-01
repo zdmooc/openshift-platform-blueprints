@@ -1,0 +1,89 @@
+name: Reference Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "architecture/**"
+      - "docs/governance/**"
+      - "docs/standards/**"
+      - "platform/**"
+      - "scripts/validate-reference-assets.py"
+      - ".yamllint.yml"
+      - ".github/workflows/reference-validation.yml"
+  pull_request:
+    paths:
+      - "README.md"
+      - "architecture/**"
+      - "docs/governance/**"
+      - "docs/standards/**"
+      - "platform/**"
+      - "scripts/validate-reference-assets.py"
+      - ".yamllint.yml"
+      - ".github/workflows/reference-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install YAML validators
+        run: python -m pip install --disable-pip-version-check pyyaml yamllint
+
+      - name: Repository reference and secret hygiene
+        run: python scripts/validate-reference-assets.py
+
+      - name: YAML lint
+        run: yamllint -c .yamllint.yml platform
+
+      - uses: azure/setup-kubectl@v4
+        with:
+          version: v1.31.0
+
+      - name: Render Kustomize reference assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          dirs=(
+            platform/gitops/cluster-config/namespaces
+            platform/gitops/cluster-config/quotas
+            platform/gitops/cluster-config/rbac
+            platform/gitops/cluster-config/networkpolicies
+            platform/observability/servicemonitors
+            platform/examples/demo-metrics
+            platform/gitops/argocd-apps
+          )
+          mkdir -p /tmp/rendered
+          for dir in "${dirs[@]}"; do
+            out="/tmp/rendered/$(echo "$dir" | tr '/' '_').yaml"
+            kubectl kustomize "$dir" > "$out"
+            test -s "$out"
+          done
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+
+      - name: Install kubeconform
+        run: |
+          go install github.com/yannh/kubeconform/cmd/kubeconform@v0.6.7
+          echo "$HOME/go/bin" >> "$GITHUB_PATH"
+
+      - name: Kubernetes schema validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in /tmp/rendered/*.yaml; do
+            echo "Validating $file"
+            kubeconform -strict -summary -ignore-missing-schemas "$file"
+          done
