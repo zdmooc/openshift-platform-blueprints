@@ -1,7 +1,7 @@
 # OpenShift Platform Blueprints
 
 **Canonical role:** OpenShift Architecture / Knowledge / Standards Reference  
-**Portfolio status:** KEEP / REFERENCE / ACTIVE CLEANUP  
+**Portfolio status:** KEEP / REFERENCE / STATIC_VALIDATED  
 **Last governance review:** 2026-10-01
 
 This repository is the OpenShift architecture and standards reference of the MayaBank portfolio. It connects platform architecture, reusable reference blueprints and structured OpenShift learning material without pretending to own every runtime capability.
@@ -118,17 +118,15 @@ Certification material is explicitly a **learning/reference asset**. It is not a
 5. Validation status must match evidence.
 6. Small executable examples are kept only when they clarify a platform standard.
 
-## Current cleanup program
+## O1 cleanup baseline
 
-The 2026-10-01 O1 cleanup performs:
+The 2026-10-01 O1 cleanup is **complete (I1→I7)**.
 
-- repository scope and ownership clarification;
-- YAML/GitOps repair;
-- architecture/reference normalization;
-- cross-repository boundaries;
-- automated validation;
-- certification-track normalization;
-- final evidence/index baseline.
+The active platform reference surface passed the `Reference Validation` workflow, including YAML parsing, yamllint, Kustomize rendering and kubeconform. First complete successful validation: run `36854282558`.
+
+This proves `STATIC_VALIDATED` reference assets only. It does not claim CRC runtime, multi-node resilience or production deployment.
+
+Completion record: `docs/governance/O1_CLEANUP_COMPLETION.md`.
 
 The governing portfolio decision is documented in `zdmooc/cadrage_202682030`, decision D-075.
 
