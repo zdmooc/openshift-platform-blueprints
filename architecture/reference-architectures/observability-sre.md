@@ -338,3 +338,17 @@ Cette brique renforce à la fois la qualité technique du dépôt, sa valeur pé
 Architecte technique / plateforme / cloud-native  
 OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
 
+
+---
+
+## Portfolio ownership boundary — 2026-10-01
+
+This document owns the **observability/SRE architecture reference**.
+
+Runtime ownership:
+
+- common telemetry integration and shared collector contracts: `shared-platform-services-openshift`;
+- cluster health and Day-2 operational evidence: `k8s-openshift-cluster-factory`;
+- enterprise APM specialist evidence remains in its dedicated observability repositories.
+
+The ServiceMonitor under `platform/` is a small validation example, not a competing monitoring stack.
