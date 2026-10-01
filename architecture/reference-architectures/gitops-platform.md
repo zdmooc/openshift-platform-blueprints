@@ -343,3 +343,17 @@ C’est cette cohérence qui donne de la valeur au dépôt, aussi bien comme sup
 Architecte technique / plateforme / cloud-native  
 OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
 
+
+---
+
+## Portfolio ownership boundary — 2026-10-01
+
+This document owns the **GitOps architecture principles** used by the OpenShift reference.
+
+Runtime ownership is split as follows:
+
+- `argocd-expert-pack` — deep Argo CD/OpenShift GitOps labs and runtime evidence;
+- `shared-platform-services-openshift` — shared GitOps governance and consumption contracts;
+- product repositories — product manifests and environment overlays.
+
+The small Applications under `platform/gitops/` are **reference examples** only. They must remain renderable and must not evolve into a second operational GitOps platform.
