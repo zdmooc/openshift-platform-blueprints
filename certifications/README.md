@@ -1,73 +1,71 @@
-# Certifications OpenShift
+# OpenShift Certification Learning Tracks
 
-Ce répertoire regroupe les parcours de certification liés à Red Hat OpenShift et aux domaines les plus utiles pour un positionnement **OpenShift Expert** et **OpenShift Architect**.
+**Status:** REFERENCE / LEARNING ASSETS  
+**Last review:** 2026-10-01
 
-## Objectif
+This directory contains structured learning material related to Red Hat OpenShift certification domains.
 
-Donner une structure claire et exploitable pour :
+It is a **learning and knowledge area**. The presence of a track, lab or book does **not** mean the corresponding certification has been obtained.
 
-- organiser la préparation des certifications OpenShift ;
-- centraliser les supports, books, labs, cheatsheets et checklists ;
-- relier les certifications aux briques plateforme utiles en mission ;
-- transformer la préparation certif en actif de portfolio.
+## Canonical tracks
 
-## Logique d’organisation
+| Track | Current repository path | Portfolio role |
+|---|---|---|
+| EX280 | `certifications/ex280/` | OpenShift administration foundations |
+| EX288 | `certifications/ex288_real_final_repo_enriched/` | OpenShift application development learning assets |
+| EX370 | `certifications/ex370/` | OpenShift Data Foundation / storage |
+| EX380 | `certifications/ex380/` | advanced administration/automation/operations topics |
+| EX480 | `certifications/ex480/` | multi-cluster / governance learning |
+| EX482 | `certifications/ex482/` | event-driven / Kafka-related learning |
 
-Chaque certification possède son propre espace dédié dans `certifications/`.
+## Normalization rule
 
-Exemples de certifications cibles :
+Historical directory names are preserved when renaming hundreds of assets would add risk without architectural value.
 
-- `ex280/` — administration OpenShift
-- `ex288/` — développement applicatif OpenShift
-- `ex370/` — OpenShift Data Foundation
-- `ex380/` — automation / integration
-- `ex480/` — multi-cluster management
-- `ex482/` — event-driven / Kafka
+The canonical human-readable map is maintained in:
 
-Chaque espace peut contenir, selon le besoin :
+- `certifications/CERTIFICATION_INDEX.md`;
+- this README;
+- the repository root README.
 
-- un `README.md` de cadrage ;
-- un `book-v1/` pour le support long ;
-- un `track/` ou des labs pratiques ;
-- des cheatsheets ;
-- des checklists de préparation ;
-- des notes et éléments de preuve.
+Future new content should use the normalized track names documented in the index.
 
-## Finalité de ce répertoire
+## Expected structure of a track
 
-Ce répertoire n’est pas seulement un espace de révision.
+A track may contain:
 
-Il sert aussi à montrer :
+- `README.md` — scope and navigation;
+- `PREPARATION.md` — study plan;
+- `CHECKLIST.md` — objectives/checklist;
+- `LABS.md` — lab map;
+- `track/` — practical progression;
+- `book-v1/` — long-form learning support when useful;
+- evidence placeholders only when they correspond to actual lab execution.
 
-- une compréhension structurée des parcours OpenShift ;
-- une capacité à produire des supports réutilisables ;
-- une progression cohérente entre certifications, plateforme et use cases ;
-- un positionnement crédible de portfolio technique.
+Not every historical track currently has every element.
 
-## Répertoires disponibles
+## Separation from platform architecture
 
-- `ex280/`
-- `ex288/`
-- `ex370/`
-- `ex380/`
-- `ex480/`
-- `ex482/`
+Certification labs may demonstrate OpenShift concepts, but they do not own production platform standards.
 
-## Convention de travail
+The canonical architecture remains under:
 
-Chaque certification doit converger vers une structure lisible, stable et réutilisable.
+- `architecture/`;
+- `docs/standards/`;
+- `docs/governance/`.
 
-L’objectif n’est pas d’empiler des notes, mais de construire un actif exploitable pour :
+Small validated platform examples remain under `platform/`.
 
-- apprentissage,
-- démonstration,
-- transmission,
-- portfolio.
+## Truth boundary
 
-## Étape suivante
+Use the repository evidence vocabulary:
 
-Une fois ce point d’entrée stabilisé :
+`REFERENCE | IMPLEMENTED | STATIC_VALIDATED | CI_RUNTIME_PROVEN | CRC_RUNTIME_PROVEN | MULTINODE_PROVEN`.
 
-1. aligner la structure de chaque certification ;
-2. absorber les éléments utiles de `certifs-openshift/` ;
-3. supprimer ensuite `certifs-openshift/`.
+A learning lab is normally `REFERENCE` or `IMPLEMENTED` until an execution result is explicitly stored.
+
+## Portfolio use
+
+The value of this directory is to demonstrate structured learning, technical depth and reusable training material.
+
+It must not be used to imply a certification status that is not independently verified.
