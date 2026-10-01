@@ -1,19 +1,19 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-name: ex280-demo-metrics
-namespace: ex280-lab
-labels:
-app: demo-metrics
-team: ex-labs
+  name: ex280-demo-metrics
+  namespace: ex280-lab
+  labels:
+    app.kubernetes.io/name: demo-metrics
+    app.kubernetes.io/part-of: openshift-platform-blueprints
 spec:
-selector:
-matchLabels:
-app: demo-metrics
-namespaceSelector:
-matchNames:
-- ex280-lab
-endpoints:
-- port: http-metrics
-path: /metrics
-interval: 30s
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: demo-metrics
+  namespaceSelector:
+    matchNames:
+      - ex280-lab
+  endpoints:
+    - port: http-metrics
+      path: /metrics
+      interval: 30s
