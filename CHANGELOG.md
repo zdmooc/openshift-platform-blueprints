@@ -36,4 +36,4 @@
 ### I7 — Evidence / finalization
 - added claim/evidence matrix;
 - added final architecture index;
-- final CI status is recorded after successful workflow execution.
+- static validation recorded: Reference Validation run 36854282558 SUCCESS.
