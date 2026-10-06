@@ -2,9 +2,20 @@
 
 **Canonical role:** OpenShift Architecture / Knowledge / Standards Reference  
 **Portfolio status:** KEEP / REFERENCE / STATIC_VALIDATED  
-**Last governance review:** 2026-10-01
+**Last governance review:** 2026-10-06 — D-098
 
 This repository is the OpenShift architecture and standards reference of the MayaBank portfolio. It connects platform architecture, reusable reference blueprints and structured OpenShift learning material without pretending to own every runtime capability.
+
+## D-098 — SQY mission reference overlay
+
+For the IT-EXPLORER SQY Expert Kubernetes/OpenShift mission, this repository supplies the
+**OpenShift architecture and standards layer**.
+
+Mission-specific reference:
+- `architecture/reference-architectures/d098-sqy-caas-onprem.md`.
+
+The operational CaaS/lifecycle owner remains `k8s-openshift-cluster-factory`.
+The Data Lakehouse remains a workload proof and is not reclassified as the CaaS core.
 
 ## What this repository owns
 
