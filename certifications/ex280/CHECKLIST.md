@@ -1,39 +1,44 @@
-Checklist de révision — EX280
-Objectif
+# Checklist de révision — EX280
 
-Cette checklist sert à mesurer la progression réelle. Elle doit être cochée au fil de la pratique, pas seulement lue.
+**Type : checklist de préparation, pas certificat.**
 
-1. Cadrage
+## A. Complétude du dépôt
 
+- [x] README canonique
+- [x] feuille de route `PREPARATION.md`
+- [x] parcours `LABS.md`
+- [x] journal `NOTES.md`
+- [x] objectifs / checklist du track
+- [x] labs actifs Lab00 → Lab17
+- [x] supports corrigés observés Lab01 → Lab16
+- [x] capstone / examen blanc Lab17 présent
+- [x] séparation explicite entre matériel de préparation et certification obtenue
 
-2. Environnement CRC
+## B. Compétences à rejouer à froid
 
+- [ ] bootstrap CRC, contexte, nodes et ClusterOperators
+- [ ] projet / déploiement / Service / Route / rollout
+- [ ] ConfigMap / Secret
+- [ ] PVC / probes / requests-limits
+- [ ] TLS / NetworkPolicy
+- [ ] users / groups / RBAC / ServiceAccounts
+- [ ] SCC
+- [ ] quotas / LimitRange / scaling
+- [ ] Templates
+- [ ] Helm / Kustomize
+- [ ] Operators / OLM
+- [ ] events / logs / troubleshooting
+- [ ] Jobs / CronJobs
 
-3. Fondamentaux
+## C. Gate examen
 
+- [ ] Lab17 exécuté à froid
+- [ ] temps et résultat enregistrés
+- [ ] erreurs restantes consignées
+- [ ] deuxième passage réussi sans aide majeure
+- [ ] modalités officielles re-vérifiées avant réservation
 
-4. Stockage et fiabilité
+## Statut
 
-
-5. Accès et sécurité
-
-
-6. Réseau
-
-
-7. Contrôle des ressources
-
-
-8. Troubleshooting
-
-
-9. Automatisation utile
-
-
-10. Répétition
-
-
-11. Mini-exam
-
-
-12. Validation finale
+**Repository preparation assets : COMPLETE.**  
+**Exam readiness personnel : NOT_CLAIMED tant que le capstone n'est pas rejoué et tracé.**

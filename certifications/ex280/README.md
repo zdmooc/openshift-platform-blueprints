@@ -82,21 +82,24 @@ Parcours de labs actif
 
 Le parcours actif visé est le suivant :
 
-Lab00 — environnement CRC, login, santé cluster, projet de travail
-Lab01 — projets, contextes, vues de base
-Lab02 — déploiement, service, route, ConfigMap, Secret
-Lab03 — PVC, probes, resources
-Lab04 — users, groups, RBAC, HTPasswd
-Lab05 — ServiceAccounts, SCC, Secrets
-Lab06 — routes et TLS
-Lab07 — NetworkPolicies
-Lab08 — quotas, LimitRange, scaling simple
-Lab09 — logs, events, troubleshooting
-Lab10 — Templates OpenShift
-Lab11 — Helm et Kustomize
-Lab12 — Operators / OLM
-Lab13 — Jobs et CronJobs
-Lab14 — mini-exam 90 minutes
+Lab00 — bootstrap CRC / santé cluster
+Lab01 — projets, contextes et recherche d'images
+Lab02 — déploiement déclaratif, Service, Route et rollout
+Lab03 — ConfigMaps et Secrets
+Lab04 — PVC, probes et resources
+Lab05 — Routes et TLS
+Lab06 — NetworkPolicies
+Lab07 — exposition non-HTTP / LoadBalancer
+Lab08 — HTPasswd, users, groups et RBAC
+Lab09 — ServiceAccounts, RBAC et API
+Lab10 — SCC et runtime security
+Lab11 — quotas, LimitRange, ProjectTemplate et scaling
+Lab12 — Templates OpenShift
+Lab13 — Helm et Kustomize
+Lab14 — Operators / OLM
+Lab15 — logging, events et troubleshooting
+Lab16 — Jobs et CronJobs
+Lab17 — capstone / examen blanc
 Règles de travail
 1. CLI-first
 
