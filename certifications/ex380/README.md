@@ -31,3 +31,14 @@ EX430, EX432, EX370, EX229
 - erreurs fréquentes ;
 - synthèse d'examen ;
 - liens vers la documentation.
+
+
+## État du track — audit 2026-10-08
+
+**Repository preparation assets : COMPLETE / STRUCTURED.**  
+**Runtime replay : PARTIAL / NOT_CLAIMED globally.**  
+**Official certification : NOT_CLAIMED.**
+
+Le contenu détaillé est déjà présent sous `book-v1/` : identité, OADP, partitionnement cluster, scheduling avancé, GitOps, monitoring, logging et scénarios d'examen.
+
+La préparation doit être présentée comme un parcours structuré. Une exécution runtime n'est promue que si une preuve datée est stockée.
