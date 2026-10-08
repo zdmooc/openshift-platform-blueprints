@@ -23,3 +23,14 @@ Dépôt EX288 enrichi pour la pratique réelle, sans scripts d’automatisation.
 1. `START_HERE.md`
 2. `LABS.md`
 3. `track/01-openshift-core/01A-projects-contexts/README.md`
+
+
+## Audit 2026-10-08
+
+- canonical human label: **EX288**;
+- repository learning assets: **complete and structured**;
+- 84 files observed in the historical tree;
+- runtime execution remains lab-specific;
+- official certification is not claimed.
+
+See `STATUS.md`.

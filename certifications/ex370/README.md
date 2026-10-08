@@ -31,3 +31,10 @@ Aucun suivant imposé
 - erreurs fréquentes ;
 - synthèse d'examen ;
 - liens vers la documentation.
+
+
+## Audit 2026-10-08
+
+The repository-side preparation assets are complete and coherent. Runtime ODF validation remains environment-dependent and is not inferred from CRC.
+
+See `STATUS.md` and `LABS.md`.
