@@ -292,3 +292,19 @@ Ce document portfolio sert précisément à expliciter cette valeur, à la rendr
 Architecte technique / plateforme / cloud-native  
 OpenShift | Kubernetes | GitOps | Sécurité | Observabilité | Architecture
 
+
+
+## 12. Certification learning tracks — positionnement 2026
+
+Le dépôt comporte désormais une gouvernance explicite des parcours de préparation :
+
+- EX280 et EX380 : parcours principaux pour le positionnement OpenShift / Platform Engineering ;
+- EX288 et EX370 : parcours complémentaires ;
+- EX480 et EX482 : références légères.
+
+La valeur portfolio vient de la structuration, des labs et de leur lien avec les preuves runtime des dépôts canoniques. La présence de ces parcours ne vaut pas certification officielle obtenue.
+
+Formulation CV recommandée :
+- **EX280 — préparation en cours** ;
+- **EX380 — préparation en cours** ;
+- EX288 / EX370 comme parcours techniques complémentaires si l'espace le permet.

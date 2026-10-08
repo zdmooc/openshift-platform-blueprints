@@ -1,6 +1,6 @@
 # Claim / Evidence Matrix
 
-**Date:** 2026-10-01
+**Date:** 2026-10-08
 
 | Capability | Repository state | Static validation | CI runtime | CRC/OpenShift | Multi-node |
 |---|---|---|---|---|---|
@@ -13,7 +13,11 @@
 | ServiceMonitor example | IMPLEMENTED | STATIC_VALIDATED — run 36854282558 | NOT_CLAIMED | NOT_CLAIMED | NOT_CLAIMED |
 | Demo metrics workload | IMPLEMENTED | STATIC_VALIDATED — run 36854282558 | NOT_CLAIMED | NOT_CLAIMED | NOT_CLAIMED |
 | Argo CD Applications | IMPLEMENTED | STATIC_VALIDATED — run 36854282558 | NOT_CLAIMED | NOT_CLAIMED | NOT_CLAIMED |
-| Certification tracks | REFERENCE / LEARNING | out of active runtime gate | track-specific only | track-specific only | NOT_CLAIMED |
+| EX280 preparation track | REFERENCE / REPO_PREP_COMPLETE | structure validated in CI | human replay only | CRC-oriented material, runtime not globally claimed | NOT_CLAIMED |
+| EX288 preparation track | REFERENCE / MATURE_LEARNING_TRACK | structure validated in CI | lab-specific only | runtime not globally claimed | NOT_CLAIMED |
+| EX370 preparation track | REFERENCE / REPO_PREP_COMPLETE | structure validated in CI | environment-dependent | ODF runtime not inferred from CRC | NOT_CLAIMED |
+| EX380 preparation track | REFERENCE / REPO_PREP_COMPLETE | structure validated in CI | human replay / canonical runtime reuse | track-specific only | NOT_CLAIMED |
+| EX480 / EX482 | REFERENCE / LIGHTWEIGHT | structure validated in CI | NOT_CLAIMED | NOT_CLAIMED | NOT_CLAIMED |
 
 ## Promotion rule
 

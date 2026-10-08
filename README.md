@@ -2,7 +2,7 @@
 
 **Canonical role:** OpenShift Architecture / Knowledge / Standards Reference  
 **Portfolio status:** KEEP / REFERENCE / STATIC_VALIDATED  
-**Last governance review:** 2026-10-06 — D-098
+**Last governance review:** 2026-10-08 — D-098 + certification-track closure
 
 This repository is the OpenShift architecture and standards reference of the MayaBank portfolio. It connects platform architecture, reusable reference blueprints and structured OpenShift learning material without pretending to own every runtime capability.
 
@@ -111,14 +111,14 @@ Operational implementations belong to their canonical repositories.
 
 The learning area currently covers:
 
-- EX280 — OpenShift Administration;
-- EX288 — application development;
-- EX370 — OpenShift Data Foundation / storage;
-- EX380 — automation, identity, backup, monitoring and GitOps topics;
-- EX480 — multi-cluster management/governance;
-- EX482 — event-driven / Kafka-related learning.
+- **EX280** — primary OpenShift administration preparation; repository track complete;
+- **EX380** — primary advanced administration/automation preparation; repository track complete;
+- **EX288** — mature complementary application-development track;
+- **EX370** — complementary OpenShift Data Foundation/storage track, runtime environment-dependent;
+- **EX480** — lightweight multi-cluster/governance reference;
+- **EX482** — lightweight event-driven/Kafka reference.
 
-Certification material is explicitly a **learning/reference asset**. It is not a certification claim.
+Certification material is explicitly a **learning/reference asset**. Repository preparation completion is not an official certification claim. The certification area is structurally validated in CI.
 
 ## Principles
 

@@ -9,7 +9,9 @@ on:
       - "docs/governance/**"
       - "docs/standards/**"
       - "platform/**"
+      - "certifications/**"
       - "scripts/validate-reference-assets.py"
+      - "scripts/validate-certification-tracks.py"
       - ".yamllint.yml"
       - ".github/workflows/reference-validation.yml"
   pull_request:
@@ -19,7 +21,9 @@ on:
       - "docs/governance/**"
       - "docs/standards/**"
       - "platform/**"
+      - "certifications/**"
       - "scripts/validate-reference-assets.py"
+      - "scripts/validate-certification-tracks.py"
       - ".yamllint.yml"
       - ".github/workflows/reference-validation.yml"
   workflow_dispatch:
@@ -42,6 +46,9 @@ jobs:
 
       - name: Repository reference and secret hygiene
         run: python scripts/validate-reference-assets.py
+
+      - name: Certification track structure
+        run: python scripts/validate-certification-tracks.py
 
       - name: YAML lint
         run: yamllint -c .yamllint.yml platform

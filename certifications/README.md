@@ -1,71 +1,71 @@
 # OpenShift Certification Learning Tracks
 
-**Status:** REFERENCE / LEARNING ASSETS  
-**Last review:** 2026-10-01
+**Status:** REFERENCE / LEARNING ASSETS / GOVERNANCE COMPLETE  
+**Last review:** 2026-10-08
 
 This directory contains structured learning material related to Red Hat OpenShift certification domains.
 
-It is a **learning and knowledge area**. The presence of a track, lab or book does **not** mean the corresponding certification has been obtained.
+The presence of a track, lab, correction, mock exam or book does **not** mean the corresponding certification has been obtained.
 
 ## Canonical tracks
 
 | Track | Current repository path | Portfolio role |
 |---|---|---|
-| EX280 | `certifications/ex280/` | OpenShift administration foundations |
-| EX288 | `certifications/ex288_real_final_repo_enriched/` | OpenShift application development learning assets |
-| EX370 | `certifications/ex370/` | OpenShift Data Foundation / storage |
-| EX380 | `certifications/ex380/` | advanced administration/automation/operations topics |
-| EX480 | `certifications/ex480/` | multi-cluster / governance learning |
-| EX482 | `certifications/ex482/` | event-driven / Kafka-related learning |
+| EX280 | `certifications/ex280/` | primary OpenShift administration preparation |
+| EX288 | `certifications/ex288_real_final_repo_enriched/` | complementary application development preparation |
+| EX370 | `certifications/ex370/` | complementary ODF/storage preparation |
+| EX380 | `certifications/ex380/` | primary advanced administration/automation preparation |
+| EX480 | `certifications/ex480/track/` | lightweight multi-cluster/governance reference |
+| EX482 | `certifications/ex482/` | lightweight event-driven/Kafka reference |
 
-## Normalization rule
+## 2026-10-08 completion
 
-Historical directory names are preserved when renaming hundreds of assets would add risk without architectural value.
+Repository-side certification governance has been normalized:
+- EX280 path aligned with its real Lab00→Lab17 track;
+- EX380 path aligned with its real identity/OADP/scheduling/GitOps/observability content;
+- EX288 historical tree audited and retained without disruptive rename;
+- EX370 ODF preparation separated from runtime HA claims;
+- portfolio wording and evidence boundaries centralized;
+- certification structure is now checked in CI.
 
-The canonical human-readable map is maintained in:
+## Expected structure
 
-- `certifications/CERTIFICATION_INDEX.md`;
-- this README;
-- the repository root README.
+A mature track can contain:
+- `README.md`;
+- `PREPARATION.md`;
+- `CHECKLIST.md`;
+- `LABS.md`;
+- `STATUS.md`;
+- `track/` or `book-v1/`;
+- explicit evidence only when actual execution exists.
 
-Future new content should use the normalized track names documented in the index.
-
-## Expected structure of a track
-
-A track may contain:
-
-- `README.md` — scope and navigation;
-- `PREPARATION.md` — study plan;
-- `CHECKLIST.md` — objectives/checklist;
-- `LABS.md` — lab map;
-- `track/` — practical progression;
-- `book-v1/` — long-form learning support when useful;
-- evidence placeholders only when they correspond to actual lab execution.
-
-Not every historical track currently has every element.
+Lightweight tracks may intentionally contain fewer assets.
 
 ## Separation from platform architecture
 
-Certification labs may demonstrate OpenShift concepts, but they do not own production platform standards.
+Certification labs do not own production platform standards.
 
-The canonical architecture remains under:
-
-- `architecture/`;
-- `docs/standards/`;
-- `docs/governance/`.
-
-Small validated platform examples remain under `platform/`.
+Canonical owners remain:
+- `architecture/`, `docs/standards/`, `docs/governance/` for architecture;
+- `platform/` for small validated examples;
+- Cluster Factory / Shared Platform / specialist repositories for runtime implementations.
 
 ## Truth boundary
 
-Use the repository evidence vocabulary:
+A learning track is normally `REFERENCE` or `IMPLEMENTED`. Runtime levels are promoted only from observed evidence.
 
-`REFERENCE | IMPLEMENTED | STATIC_VALIDATED | CI_RUNTIME_PROVEN | CRC_RUNTIME_PROVEN | MULTINODE_PROVEN`.
+Safe CV wording:
+- "EX280 — préparation en cours";
+- "EX380 — préparation en cours";
+- "parcours technique EX288 / EX370".
 
-A learning lab is normally `REFERENCE` or `IMPLEMENTED` until an execution result is explicitly stored.
+Unsafe without independent proof:
+- "certifié EX280/EX380/EX288/EX370".
 
 ## Portfolio use
 
-The value of this directory is to demonstrate structured learning, technical depth and reusable training material.
+The certification area demonstrates structured learning, technical depth, repeatable exercises and disciplined evidence boundaries. It complements — but does not replace — professional experience and runtime proofs in canonical repositories.
 
-It must not be used to imply a certification status that is not independently verified.
+See:
+- `CERTIFICATION_INDEX.md`;
+- `PORTFOLIO_READINESS.md`.
