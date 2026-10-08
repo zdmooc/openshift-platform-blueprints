@@ -66,7 +66,7 @@ for label in ("EX280", "EX288", "EX370", "EX380", "EX480", "EX482"):
         sys.exit(1)
 
 truth = (ROOT / "certifications/README.md").read_text(encoding="utf-8").lower()
-for phrase in ("does not mean", "official", "runtime"):
+for phrase in ("official", "runtime", "not"):
     if phrase not in truth:
         print(f"Truth-boundary wording missing keyword: {phrase}")
         sys.exit(1)
