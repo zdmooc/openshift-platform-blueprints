@@ -1,0 +1,13 @@
+# NOTICE — Original project material
+
+Copyright (c) 2026 Zidane Djamal.
+
+Original project material authored and owned by Zidane Djamal is offered under the Apache License, Version 2.0 (see LICENSE). This includes original reference designs, lab scripts and original documentation, to the extent the author owns the rights to license them.
+
+## Third-party rights
+
+This grant does **not** relicense third-party code, documentation, diagrams, templates, trademarks, or other content. Original upstream notices and license conditions remain applicable. References to Kubernetes, OpenShift, Argo CD and other products do not imply affiliation or endorsement.
+
+Third-party component provenance and license compliance have not been exhaustively audited for every file. Any material found to be copied from an upstream source must retain the corresponding notice and license; do not assume it is Apache-2.0 merely because this repository has a root LICENSE.
+
+Contributions by others remain subject to their own grants; ownership is not transferred by this notice.
